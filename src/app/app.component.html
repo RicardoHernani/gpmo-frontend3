@@ -5,7 +5,6 @@
         <ion-list id="inbox-list">
           <ion-list-header>Sistema GPMO</ion-list-header>
           <ion-note>rhac.sistemas@gmail.com</ion-note>
-
           <ion-menu-toggle auto-hide="false" *ngFor="let menu of menuCollection; let i = index">
             <ion-item routerDirection="root" [routerLink]="[menu.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon slot="start" [ios]="menu.icon + '-outline'" [md]="menu.icon + '-sharp'"></ion-icon>
@@ -13,7 +12,6 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
-
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

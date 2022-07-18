@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { MenuController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
 
-  constructor(private router: Router) {
+  constructor(public menu: MenuController, public navCtrl: NavController) {
    }
 
-  login(){
-    this.router.navigate(['/referencias']);
+    ionViewWillEnter(): void {
+     this.menu.swipeGesture(false);
   }
 
-
-  ngOnInit() {
-  }
+    login() {
+      this.navCtrl.navigateForward('referencias');
+    }
 
 }

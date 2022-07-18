@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-referencias',
   templateUrl: './referencias.page.html',
   styleUrls: ['./referencias.page.scss'],
 })
-export class ReferenciasPage implements OnInit {
+export class ReferenciasPage  {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  constructor(public menu: MenuController) { }
 
 }
