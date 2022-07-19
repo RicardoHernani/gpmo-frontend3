@@ -13,7 +13,11 @@ export class ReferenciaService {
 }
 
 findByCodigo(codigo: string): Observable<ReferenciaDTO> {
-        return this.http.get<ReferenciaDTO>(`${API_CONFIG.baseUrl}/referencias/${codigo}`);
+  return this.http.get<ReferenciaDTO>(`${API_CONFIG.baseUrl}/referencias/${codigo}`);
     }
+
+findByDescricao(descricao: string): Observable<ReferenciaDTO[]> {
+  return this.http.get<ReferenciaDTO[]>(`${API_CONFIG.baseUrl}/referencias/page?text=${descricao}`);
+  }
 
 }

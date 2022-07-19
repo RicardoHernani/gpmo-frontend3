@@ -21,4 +21,14 @@ export class ReferenciasPage  {
       });
   }
 
+  mostrarPorDescricao(){
+    this.referenciaService.findByDescricao('consulta')
+      .subscribe(resposta => {
+      console.log(resposta);
+      },
+      error => {console.log(error);
+      });
+  }
+
+
 }
