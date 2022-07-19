@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { ReferenciaService } from 'src/app/services/domain/referencia.service';
 
 @Component({
   selector: 'app-referencias',
@@ -8,6 +9,16 @@ import { MenuController } from '@ionic/angular';
 })
 export class ReferenciasPage  {
 
-  constructor(public menu: MenuController) { }
+  constructor(public referenciaService: ReferenciaService,
+     public menu: MenuController) { }
+
+  mostrarPorCodigo(){
+    this.referenciaService.findByCodigo('10101012')
+      .subscribe(resposta => {
+      console.log(resposta);
+      },
+      error => {console.log(error);
+      });
+  }
 
 }
