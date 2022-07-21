@@ -30,7 +30,7 @@
         <ion-list>
           <ng-container *ngIf="(varControle === true); else mostraLista">
           <ion-item>
-            <ion-label>
+            <ion-label *ngIf="guardaResposta">
               <h2>Código: {{guardaResposta.codigo}}</h2>
               <p> <strong>Descrição:</strong> {{guardaResposta.descricao}} </p>
               <p> <strong>Pontos:</strong> {{guardaResposta.pontos}} </p>
@@ -55,6 +55,3 @@
           </ng-template>
 
 </ion-content>
-
-
-
