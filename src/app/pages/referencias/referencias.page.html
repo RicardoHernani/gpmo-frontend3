@@ -30,7 +30,7 @@
         <ion-list>
           <ng-container *ngIf="(varControle === true); else mostraLista">
           <ion-item>
-            <ion-label *ngIf="guardaResposta">
+            <ion-label *ngIf="guardaResposta">       <!--ngIf adicionado para não pegar as variáveis como undefined-->
               <h2>Código: {{guardaResposta.codigo}}</h2>
               <p> <strong>Descrição:</strong> {{guardaResposta.descricao}} </p>
               <p> <strong>Pontos:</strong> {{guardaResposta.pontos}} </p>
@@ -43,7 +43,7 @@
     </ng-template>
   </ion-modal>
 
-          <ng-template #mostraLista>
+          <ng-template #mostraLista>               <!--Parte do else do ngIf do ng-container-->
             <ion-item *ngFor="let item of items">
               <ion-label>
                 <h2>Código: {{item.codigo}}</h2>

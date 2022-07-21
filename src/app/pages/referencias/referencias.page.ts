@@ -10,20 +10,21 @@ import { ReferenciaService } from 'src/app/services/domain/referencia.service';
 })
 export class ReferenciasPage  {
 
-objeto: string;
-refs: ReferenciaDTO = {
-  codigo: '',
-  descricao: '',
-  pontos: '',
-  valor: ''
-};
-guardaResposta: ReferenciaDTO;
-items: ReferenciaDTO[];
-varControle = false;
+  objeto: string;
+  refs: ReferenciaDTO = {
+    codigo: '',
+    descricao: '',
+    pontos: '',
+    valor: ''
+  };
+  guardaResposta: ReferenciaDTO;
+  items: ReferenciaDTO[];
+  varControle = false;
 
-constructor(public referenciaService: ReferenciaService,
-            public menu: MenuController) {
-}
+  constructor(
+    public referenciaService: ReferenciaService,
+    public menu: MenuController) {
+  }
 
   analizaObjeto(objeto: string) {
     if (parseInt(objeto, 10)) {
@@ -43,18 +44,18 @@ constructor(public referenciaService: ReferenciaService,
         this.guardaResposta = resposta;
       },
         error => {
-
+          console.log(error);
       });
   }
 
   mostraPorDescricao(){
     this.referenciaService.findByDescricao(this.refs.descricao)
       .subscribe(resposta => {
-       // eslint-disable-next-line @typescript-eslint/dot-notation
+        // eslint-disable-next-line @typescript-eslint/dot-notation
         this.items = (resposta['content']);
       },
         error => {
-
+          console.log(error);
       });
   }
 
