@@ -9,10 +9,51 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Digite Código ou Descrição</ion-label>
+    <ion-input clear-input="true" clear-on-edit="true" required="true" [(ngModel)]="objeto"></ion-input>
+  </ion-item>
+  <br>
+  <ion-button id="open-modal" expand="block" (click)="analizaObjeto(objeto)">Pesquisar</ion-button>
 
-<ion-content [fullscreen]="true">
-  <ion-button (click)="mostrarPorCodigo()">Buscar</ion-button>
-  <ion-button (click)="mostrarPorDescricao()">Descrição</ion-button>
+  <ion-modal  #modal trigger="open-modal">
+    <ng-template >
+      <ion-content>
+        <ion-toolbar>
+          <ion-title>Resultado</ion-title>
+          <ion-buttons slot="end">
+            <ion-button color="light" (click)="modal.dismiss()">Fechar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+
+        <ion-list>
+          <ng-container *ngIf="(varControle === true); else mostraLista">
+          <ion-item>
+            <ion-label>
+              <h2>Código: {{guardaResposta.codigo}}</h2>
+              <p> <strong>Descrição:</strong> {{guardaResposta.descricao}} </p>
+              <p> <strong>Pontos:</strong> {{guardaResposta.pontos}} </p>
+              <p> <strong>Valor:</strong> {{guardaResposta.valor | currency }} </p>
+            </ion-label>
+          </ion-item>
+          </ng-container>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+          <ng-template #mostraLista>
+            <ion-item *ngFor="let item of items">
+              <ion-label>
+                <h2>Código: {{item.codigo}}</h2>
+                <p> <strong>Descrição:</strong> {{item.descricao}} </p>
+                <p> <strong>Pontos:</strong> {{item.pontos}} </p>
+                <p> <strong>Valor:</strong> {{item.valor | currency}} </p>
+              </ion-label>
+            </ion-item>
+          </ng-template>
+
 </ion-content>
 
 
