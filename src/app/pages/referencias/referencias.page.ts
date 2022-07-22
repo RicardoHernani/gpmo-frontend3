@@ -19,7 +19,7 @@ export class ReferenciasPage  {
   };
   guardaResposta: ReferenciaDTO;
   items: ReferenciaDTO[];
-  varControle = false;
+  varControle: boolean;
 
   constructor(
     public referenciaService: ReferenciaService,
@@ -44,7 +44,6 @@ export class ReferenciasPage  {
         this.guardaResposta = resposta;
       },
         error => {
-          console.log(error);
       });
   }
 
@@ -55,7 +54,6 @@ export class ReferenciasPage  {
         this.items = (resposta['content']);
       },
         error => {
-          console.log(error);
       });
   }
 

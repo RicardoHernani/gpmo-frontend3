@@ -8,21 +8,22 @@ import { catchError, retry } from 'rxjs/operators';
 export class ErrorIntercept implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      console.log('passou');
+
       return next.handle(request)
           .pipe(
-              retry(1),
-              catchError((error: HttpErrorResponse) => {
-                  let errorMessage = '';
-                  if (error.error instanceof ErrorEvent) {
-                      // client-side error
-                      errorMessage = `Error: ${error.error.message}`;
-                  } else {
-                      // server-side error
-                      errorMessage = `Error Status: ${error.status}\nMessage: ${error.message}`;
+              catchError((error) => {
+                  let errorObj = error;
+                  if (errorObj.error) {
+                    errorObj = errorObj.error;
                   }
-                  console.log(errorMessage);
-                  return throwError(errorMessage);
+                  if (!errorObj.status) {
+                    errorObj = JSON.parse(errorObj);
+                  }
+
+                  console.log('Erro detectado pelo interceptor:');
+                  console.log(errorObj);
+
+                  return throwError(errorObj);
               })
           );
   }
