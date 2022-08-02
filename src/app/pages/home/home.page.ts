@@ -1,3 +1,4 @@
+import { CredenciaisDTO } from './../../models/credenciais.dto';
 import { Component } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
 
@@ -8,6 +9,11 @@ import { MenuController, NavController } from '@ionic/angular';
 })
 export class HomePage {
 
+  creds: CredenciaisDTO = {
+    email: '',
+    senha: ''
+  };
+
   constructor(public menu: MenuController, public navCtrl: NavController) {
    }
 
@@ -16,6 +22,7 @@ export class HomePage {
   }
 
     login() {
+      console.log(this.creds);
       this.navCtrl.navigateForward('referencias');
     }
 

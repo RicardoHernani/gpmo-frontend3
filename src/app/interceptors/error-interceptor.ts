@@ -28,4 +28,3 @@ export class ErrorIntercept implements HttpInterceptor {
           );
   }
 }
-
