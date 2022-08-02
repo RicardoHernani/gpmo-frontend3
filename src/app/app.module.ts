@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,7 +24,8 @@ import { ErrorIntercept } from './interceptors/error-interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorIntercept,
       multi: true
-    }
+    },
+    AuthService
   ],
   bootstrap: [AppComponent],
 })

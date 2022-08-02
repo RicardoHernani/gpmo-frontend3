@@ -8,7 +8,7 @@ import { catchError, retry } from 'rxjs/operators';
 export class ErrorIntercept implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
+      console.log('Passou no Interceptor');
       return next.handle(request)
           .pipe(
               catchError((error) => {
