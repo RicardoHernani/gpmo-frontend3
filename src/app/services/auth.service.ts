@@ -1,12 +1,14 @@
+import { StorageService } from './storage.service';
 import { CredenciaisDTO } from './../models/credenciais.dto';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_CONFIG } from '../config/api.config';
+import { LocalUser } from '../models/local_user';
 
 @Injectable()
 export class AuthService {
 
-    constructor(public http: HttpClient) {
+    constructor(public http: HttpClient, public storage: StorageService) {
     }
 
     authenticate(creds: CredenciaisDTO) {
@@ -17,5 +19,19 @@ export class AuthService {
           observe: 'response',
           responseType: 'text'
         });
+    }
+
+    successfulLogin(authorizationValue: string) {
+      // eslint-disable-next-line prefer-const
+      let tok = authorizationValue.substring(7);
+      // eslint-disable-next-line prefer-const
+      let user: LocalUser = {
+          token: tok
+      };
+      this.storage.setLocalUser(user);
+    }
+
+    logout() {
+      this.storage.setLocalUser(null);
     }
 }

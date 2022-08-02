@@ -1,3 +1,4 @@
+import { StorageService } from './services/storage.service';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -25,7 +26,8 @@ import { ErrorIntercept } from './interceptors/error-interceptor';
       useClass: ErrorIntercept,
       multi: true
     },
-    AuthService
+    AuthService,
+    StorageService
   ],
   bootstrap: [AppComponent],
 })
