@@ -4,9 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_CONFIG } from '../config/api.config';
 import { LocalUser } from '../models/local_user';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable()
 export class AuthService {
+
+    jwtHelper: JwtHelperService = new JwtHelperService();
 
     constructor(public http: HttpClient, public storage: StorageService) {
     }
@@ -26,7 +29,8 @@ export class AuthService {
       let tok = authorizationValue.substring(7);
       // eslint-disable-next-line prefer-const
       let user: LocalUser = {
-          token: tok
+        token: tok,
+        email: this.jwtHelper.decodeToken(tok).sub
       };
       this.storage.setLocalUser(user);
     }
