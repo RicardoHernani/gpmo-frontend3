@@ -9,6 +9,7 @@ export class AppComponent {
   public menuCollection = [
     { title: 'Home', url: 'home', icon: 'home' },
     { title: 'Referência', url: 'referencias', icon: 'reader' },
+    { title: 'Perfil', url: 'profile', icon: 'person'}
   ];
 
   constructor() {}
