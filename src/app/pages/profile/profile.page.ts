@@ -1,3 +1,5 @@
+import { UsuarioService } from './../../services/domain/usuario.service';
+import { UsuarioDTO } from './../../models/usuario.dto';
 import { MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/services/storage.service';
@@ -9,11 +11,12 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class ProfilePage implements OnInit {
 
-  email: string;
+  usuario: UsuarioDTO;
 
   constructor(
     public storage: StorageService,
-    public menu: MenuController) {
+    public menu: MenuController,
+    public usuarioService: UsuarioService) {
     }
 
   ngOnInit() {
@@ -21,7 +24,11 @@ export class ProfilePage implements OnInit {
     let localUser = this.storage.getLocalUser();
 
     if (localUser && localUser.email) {
-      this.email = localUser.email;
+      this.usuarioService.findByEmail(localUser.email)
+      .subscribe(response => {
+        this.usuario = response;
+      },
+      error =>{});
     }
   }
 }

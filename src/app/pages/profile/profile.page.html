@@ -10,5 +10,9 @@
 </ion-header>
 
 <ion-content>
-{{ email }}
+  <ion-avatar class="circle">
+    <img [src]="usuario?.imageUrl || 'assets/icon/avatar-blank.png'">
+  </ion-avatar>
+  <h2 class="texto-format">{{ usuario?.nome }}</h2>
+  <p class="texto-format">{{ usuario?.email }}</p>
 </ion-content>
