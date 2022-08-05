@@ -40,6 +40,10 @@ export class ErrorIntercept implements HttpInterceptor {
                     this.handle403();
                     break;
 
+                    case 404:
+                    this.handle404();
+                    break;
+
                     default:
                     this.handleDefaultError(errorObj);
                   }
@@ -51,7 +55,7 @@ export class ErrorIntercept implements HttpInterceptor {
 
   async handle401() {
     const alert = await this.alertCtrl.create({
-      header: 'Erro 401',
+      header: 'Erro 401:',
       subHeader: 'Falha de autenticação!',
       message: 'Email ou senha incorretos.',
       backdropDismiss: false,
@@ -66,6 +70,21 @@ export class ErrorIntercept implements HttpInterceptor {
 
   handle403() {
     this.storage.setLocalUser(null);
+  }
+
+  async handle404() {
+    const alert = await this.alertCtrl.create({
+      header: 'Erro 404:',
+      subHeader: 'Não encontrado!',
+      message: 'Tente repetir a busca',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'OK'
+        }
+      ]
+    });
+      alert.present();
   }
 
   async handleDefaultError(errorObj: any) {
