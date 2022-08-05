@@ -21,17 +21,27 @@ export class HomePage {
     public auth: AuthService) {
    }
 
-    ionViewWillEnter(): void {
-     this.menu.swipeGesture(false);
+  ionViewWillEnter(): void {
+    this.menu.swipeGesture(false);
+}
+
+
+  ionViewDidEnter() {
+    this.auth.refreshToken()
+      .subscribe(response => {
+        this.auth.successfulLogin(response.headers.get('Authorization'));
+        this.navCtrl.navigateForward('referencias');
+      },
+      error => {});
   }
 
-    login() {
-      this.auth.authenticate(this.creds)
-        .subscribe(response => {
-          this.auth.successfulLogin(response.headers.get('Authorization'));
-          this.navCtrl.navigateForward('referencias');
-        },
-        error => {});
-    }
+  login() {
+    this.auth.authenticate(this.creds)
+      .subscribe(response => {
+        this.auth.successfulLogin(response.headers.get('Authorization'));
+        this.navCtrl.navigateForward('referencias');
+      },
+      error => {});
+  }
 
 }
