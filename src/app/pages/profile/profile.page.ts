@@ -1,6 +1,6 @@
 import { UsuarioService } from './../../services/domain/usuario.service';
 import { UsuarioDTO } from './../../models/usuario.dto';
-import { MenuController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -15,7 +15,7 @@ export class ProfilePage implements OnInit {
 
   constructor(
     public storage: StorageService,
-    public menu: MenuController,
+    public navCtrl: NavController,
     public usuarioService: UsuarioService) {
     }
 
@@ -28,7 +28,14 @@ export class ProfilePage implements OnInit {
       .subscribe(response => {
         this.usuario = response;
       },
-      error =>{});
+      error =>{
+        if (error.status === 403) {
+          this.navCtrl.navigateForward('home');
+        }
+      });
+    }
+    else {
+      this.navCtrl.navigateForward('home');
     }
   }
 }
