@@ -19,12 +19,11 @@ export class HomePage {
     public menu: MenuController,
     public navCtrl: NavController,
     public auth: AuthService) {
-   }
+  }
 
   ionViewWillEnter(): void {
     this.menu.swipeGesture(false);
-}
-
+  }
 
   ionViewDidEnter() {
     this.auth.refreshToken()

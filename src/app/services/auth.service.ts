@@ -11,7 +11,9 @@ export class AuthService {
 
     jwtHelper: JwtHelperService = new JwtHelperService();
 
-    constructor(public http: HttpClient, public storage: StorageService) {
+    constructor(
+      public http: HttpClient,
+      public storage: StorageService) {
     }
 
     authenticate(creds: CredenciaisDTO) {
