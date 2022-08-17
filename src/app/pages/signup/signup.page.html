@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="primary" slot="start">
+      <ion-back-button color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Signup
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="signupFormGroup" (ngSubmit)="signupUser(); $event.preventDefault()">
+    <ion-item>
+      <ion-label position="floating">Nome*</ion-label>
+      <ion-input clearInput="true" formControlName="nome" type="text"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="signupFormGroup.controls['nome'].dirty && signupFormGroup.controls['nome'].errors">Valor inválido</p>
+    <ion-item>
+      <ion-label position="floating">Email*</ion-label>
+      <ion-input clearInput="true" formControlName="email" type="text"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="signupFormGroup.controls['email'].dirty && signupFormGroup.controls['email'].errors">Valor inválido</p>
+    <ion-item>
+      <ion-label position="floating">Senha*</ion-label>
+      <ion-input clearInput="true" formControlName="senha" type="password"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="signupFormGroup.controls['senha'].dirty && signupFormGroup.controls['senha'].errors">Valor inválido</p>
+    <br>
+    <ion-button expand="block" type="submit" [disabled]="signupFormGroup.invalid">Criar conta</ion-button>
+  </form>
+</ion-content>
+
+
+
