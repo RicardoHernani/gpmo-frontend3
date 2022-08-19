@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
+import { FieldMessage } from '../models/fieldmessage';
 
 
 @Injectable()
@@ -42,6 +43,10 @@ export class ErrorIntercept implements HttpInterceptor {
 
                     case 404:
                     this.handle404();
+                    break;
+
+                    case 422:
+                    this.handle422(errorObj);
                     break;
 
                     case 500:      //Acrescentei a mensagem com o if para o erro 500 não ficar genérico demais
@@ -92,6 +97,20 @@ export class ErrorIntercept implements HttpInterceptor {
       alert.present();
   }
 
+  async handle422(errorObj: any) {
+    const alert = await this.alertCtrl.create({
+      header: 'Erro 422: validação',
+      message: this.listErrors(errorObj.errors),
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'OK'
+        }
+      ]
+    });
+      alert.present();
+  }
+
   async handleDefaultError(errorObj: any) {
     const alert = await this.alertCtrl.create({
       header: 'Erro ' + errorObj.status + ': ' + errorObj.error,
@@ -108,6 +127,17 @@ export class ErrorIntercept implements HttpInterceptor {
 
   handle500() {
     console.log('Esse é o erro 500 quando o usuario é null');
+  }
+
+  private listErrors(messages: FieldMessage[]): string {
+    // eslint-disable-next-line @typescript-eslint/no-inferrable-types
+    let s: string ='';
+
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
+    for (let i=0; i<messages.length; i++) {
+        s = s + '<p><strong>' + messages[i].fieldName + '</strong>: ' + messages[i].message + '</p>';
+    }
+    return s;
   }
 
 }
