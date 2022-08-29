@@ -1,16 +1,82 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
       <ion-content>
         <ion-list id="inbox-list">
           <ion-list-header>Sistema GPMO</ion-list-header>
           <ion-note>rhac.sistemas@gmail.com</ion-note>
-          <ion-menu-toggle auto-hide="false" *ngFor="let menu of menuCollection; let i = index" (click)="logoutDetection(menu)">
-            <ion-item routerDirection="root" [routerLink]="[menu.url]" lines="none" detail="false" routerLinkActive="selected">
-              <ion-icon slot="start" [ios]="menu.icon + '-outline'" [md]="menu.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ menu.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
+          <div>
+            <ion-menu-toggle auto-hide="false">
+              <ion-item routerDirection="root" routerLink="home" lines="none" detail="false" [routerLinkActive]="['active-menu']">
+                <ion-icon slot="start" name="home" ></ion-icon>
+                <ion-label>Home</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
+            <ion-menu-toggle auto-hide="false">
+              <ion-item routerDirection="root" routerLink="referencias" lines="none" detail="false" [routerLinkActive]="['active-menu']">
+                <ion-icon slot="start" name="library" ></ion-icon>
+                <ion-label>Referências</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
+            <ion-accordion-group>
+              <ion-accordion value="component">
+                <ion-item slot="header">
+                  <ion-icon slot="start" name="bandage"></ion-icon>
+                  <ion-label>Cirurgias</ion-label>
+                </ion-item>
+                <ion-list slot="content">
+                  <ion-menu-toggle auto-hide="false">
+                    <ion-item lines="none" style="padding-left: 20px;" *ngFor="let sub of subMenusCirurgias" routerDirection="root" [routerLink]="[sub.url]" detail="false" routerLinkActive="selected">
+                      <ion-icon size="small" slot="start" [name]="sub.icon"></ion-icon>
+                      <ion-label>
+                        {{sub.title}}
+                      </ion-label>
+                    </ion-item>
+                  </ion-menu-toggle>
+                </ion-list>
+              </ion-accordion>
+            </ion-accordion-group>
+
+            <ion-accordion-group>
+              <ion-accordion value="component">
+                <ion-item slot="header">
+                  <ion-icon slot="start" name="albums"></ion-icon>
+                  <ion-label>Procedimentos</ion-label>
+                </ion-item>
+                <ion-list slot="content">
+                  <ion-menu-toggle auto-hide="false">
+                    <ion-item lines="none" style="padding-left: 20px;" *ngFor="let sub of subMenusProcedimentos" routerDirection="root" [routerLink]="[sub.url]" detail="false" routerLinkActive="selected">
+                      <ion-icon size="small" slot="start" [name]="sub.icon"></ion-icon>
+                      <ion-label>
+                        {{sub.title}}
+                      </ion-label>
+                    </ion-item>
+                  </ion-menu-toggle>
+                </ion-list>
+              </ion-accordion>
+            </ion-accordion-group>
+
+            <ion-menu-toggle auto-hide="false">
+              <ion-item routerDirection="root" routerLink="profile" lines="none" detail="false" [routerLinkActive]="['active-menu']">
+                <ion-icon slot="start" name="person" ></ion-icon>
+                <ion-label>Perfil</ion-label>
+              </ion-item>
+            </ion-menu-toggle >
+
+            <ion-menu-toggle auto-hide="false" (click)="logoutDetection()">
+              <ion-item routerDirection="root" routerLink="home" lines="none" detail="false" [routerLinkActive]="['active-menu']">
+                <ion-icon slot="start" name="log-out" ></ion-icon>
+                <ion-label>Logout</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </div>
         </ion-list>
       </ion-content>
     </ion-menu>

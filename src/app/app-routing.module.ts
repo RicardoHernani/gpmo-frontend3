@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'signup',
     loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
+  },
+  {
+    path: 'cirurgias-inserir',
+    loadChildren: () => import('./pages/cirurgias-inserir/cirurgias-inserir.module').then( m => m.CirurgiasInserirPageModule)
   }
 ];
 

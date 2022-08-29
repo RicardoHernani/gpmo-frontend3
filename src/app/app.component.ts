@@ -7,18 +7,21 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  public menuCollection = [
-    { title: 'Home', url: 'home', icon: 'home' },
-    { title: 'Referência', url: 'referencias', icon: 'reader' },
-    { title: 'Perfil', url: 'profile', icon: 'person'},
-    { title: 'Logout', url: 'home', icon: 'arrow-undo'}
+
+  public subMenusCirurgias = [
+    { title: 'Inserir', url: 'cirurgias-inserir', icon: 'person-add'},
+    { title: 'Apagar', url: 'cirurgias-apagar', icon: 'trash'}
+  ];
+
+  public subMenusProcedimentos = [
+    { title: 'Inserir', url: 'procedimentos-inserir', icon: 'attach'},
+    { title: 'Apagar', url: 'procedimentos-apagar', icon: 'trash'}
   ];
 
   constructor(public auth: AuthService) {}
 
-  logoutDetection(menu: {title: string; url: string; icon: string}): void {
-    if (menu.title === 'Logout') {
+  logoutDetection() {
       this.auth.logout();
-    }
   }
+
 }
