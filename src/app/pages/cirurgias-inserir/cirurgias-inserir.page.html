@@ -1,9 +1,29 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>cirurgias-inserir</ion-title>
-  </ion-toolbar>
+     <ion-buttons slot="start">
+       <ion-menu-button color="primary"></ion-menu-button>
+     </ion-buttons>
+     <ion-title>
+       Inserir Cirurgia
+     </ion-title>
+   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
-</ion-content>
+ <ion-content class="ion-padding">
+  <form [formGroup]="inserirCirurgiaFormGroup" (ngSubmit)="loadUsuario(); $event.preventDefault()">
+    <ion-item>
+      <ion-label position="floating">Matrícula*</ion-label>
+      <ion-input clearInput="true" formControlName="matricula" type="digit"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="inserirCirurgiaFormGroup.controls['matricula'].dirty && inserirCirurgiaFormGroup.controls['matricula'].errors" margin="left">Matrícula deve conter entre 6 e 9 dígitos</p>
+    <br/>
+    <ion-item>
+      <ion-label position="floating">Data*</ion-label>
+      <br>
+      <ion-input clearInput="true" formControlName="data" type="date"></ion-input>
+    </ion-item>
+    <br/>
+    <p class="danger" *ngIf="inserirCirurgiaFormGroup.controls['data'].dirty && inserirCirurgiaFormGroup.controls['data'].errors" margin="left">Data inválida</p>
+    <ion-button expand="block" type="submit" [disabled]="inserirCirurgiaFormGroup.invalid">Inserir Cirurgia</ion-button>
+  </form>
+ </ion-content>

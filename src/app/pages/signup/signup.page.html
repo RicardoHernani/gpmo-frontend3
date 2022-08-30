@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <form [formGroup]="signupFormGroup" (ngSubmit)="signupUser(); $event.preventDefault()">
     <ion-item>
       <ion-label position="floating">Nome*</ion-label>
@@ -16,7 +16,7 @@
     <p class="danger" *ngIf="signupFormGroup.controls['nome'].dirty && signupFormGroup.controls['nome'].errors">Valor inválido</p>
     <ion-item>
       <ion-label position="floating">Email*</ion-label>
-      <ion-input clearInput="true" formControlName="email" type="text"></ion-input>
+      <ion-input clearInput="true" formControlName="email" type="email"></ion-input>
     </ion-item>
     <p class="danger" *ngIf="signupFormGroup.controls['email'].dirty && signupFormGroup.controls['email'].errors">Valor inválido</p>
     <ion-item>

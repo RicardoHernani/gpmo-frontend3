@@ -1,3 +1,4 @@
+import { CirurgiaService } from './services/domain/cirurgia.service';
 import { AuthIntercept } from './interceptors/auth-interceptor';
 import { StorageService } from './services/storage.service';
 import { AuthService } from './services/auth.service';
@@ -35,7 +36,8 @@ import { UsuarioService } from './services/domain/usuario.service';
     },
     AuthService,
     StorageService,
-    UsuarioService
+    UsuarioService,
+    CirurgiaService
   ],
   bootstrap: [AppComponent],
 })
