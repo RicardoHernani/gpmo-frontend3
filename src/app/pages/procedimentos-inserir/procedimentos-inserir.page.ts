@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, IonModal, NavController } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { ReferenciaDTO } from 'src/app/models/referencia.dto';
+import { ReferenciaService } from 'src/app/services/domain/referencia.service';
 
 @Component({
   selector: 'app-procedimentos-inserir',
@@ -14,6 +16,8 @@ export class ProcedimentosInserirPage {
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string;
 
+  guardaResposta: ReferenciaDTO;
+
   inserirProcedimentoFormGroup: FormGroup= this.formBuilder.group({
     tipo: ['', [Validators.required]],
     premio: ['', [Validators.required]],
@@ -23,11 +27,8 @@ export class ProcedimentosInserirPage {
   constructor(
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController,
-    public navCtrl: NavController) {
-  }
-
-  loadProcedimento(){
-
+    public navCtrl: NavController,
+    public referenciaService: ReferenciaService,) {
   }
 
   cancel() {
@@ -43,6 +44,19 @@ export class ProcedimentosInserirPage {
     if (ev.detail.role === 'confirm') {
       this.message = `Hello, ${ev.detail.data}!`;
     }
+  }
+
+  mostraPorCodigo(){
+    this.referenciaService.findByCodigo(this.inserirProcedimentoFormGroup.value.referenciaCodigo)
+      .subscribe(resposta => {
+        this.guardaResposta = resposta;
+      },
+        error => {
+      });
+  }
+
+  loadProcedimento(){
+
   }
 
 }

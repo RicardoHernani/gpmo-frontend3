@@ -26,7 +26,6 @@
         </ion-item>
       </ion-radio-group>
     </ion-list>
-
     <ion-list >
       <ion-radio-group formControlName="premio" value="premio">
         <ion-list-header>
@@ -49,9 +48,7 @@
     </ion-item>
     <p class="danger" *ngIf="inserirProcedimentoFormGroup.controls['referenciaCodigo'].dirty && inserirProcedimentoFormGroup.controls['referenciaCodigo'].errors" margin="left">O Código teve conter 8 dígitos</p>
     <br/>
-    <ion-button id="open-modal" expand="block" type="submit" [disabled]="inserirProcedimentoFormGroup.invalid">Inserir Procedimento</ion-button>
-
-    <p>{{ message }}</p>
+    <ion-button (click)="mostraPorCodigo()" id="open-modal" expand="block" type="submit" [disabled]="inserirProcedimentoFormGroup.invalid">Inserir Procedimento</ion-button>
     <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
       <ng-template>
         <ion-header>
@@ -64,7 +61,15 @@
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
-          <ion-button expand="block" (click)="cancel()">Mais Procedimentos</ion-button>
+        <ion-item>
+          <ion-label *ngIf="guardaResposta">
+            <h2>Código: {{guardaResposta.codigo}}</h2>
+            <p> <strong>Descrição:</strong> {{guardaResposta.descricao}} </p>
+            <p> <strong>Pontos:</strong> {{guardaResposta.pontos}} </p>
+            <p> <strong>Valor:</strong> {{guardaResposta.valor | currency }} </p>
+          </ion-label>
+        </ion-item>
+        <ion-button expand="block" (click)="cancel()">Inserir Mais</ion-button>
       </ng-template>
     </ion-modal>
   </form>
