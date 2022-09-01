@@ -73,13 +73,13 @@ export class CirurgiasInserirPage  {
   async showInsertOk() {
     const alert = await this.alertCtrl.create({
       header: 'Sucesso!',
-      message: 'Cirurgia cadastrada. Você será direcionado para a página de preenchimento dos procedimentos',
+      message: 'Cirurgia cadastrada. Você será direcionado para a tela de preenchimento dos procedimentos',
       backdropDismiss: false,
       buttons: [
         {
           text: 'OK',
           handler: () => {
-            this.navCtrl.navigateForward('ProcedimentosInserirPage');
+            this.navCtrl.navigateForward('procedimentos-inserir');  //O argumento deve ser igual ao arquivo de rotas
           }
         }
       ]

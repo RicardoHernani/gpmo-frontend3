@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'cirurgias-inserir',
     loadChildren: () => import('./pages/cirurgias-inserir/cirurgias-inserir.module').then( m => m.CirurgiasInserirPageModule)
+  },
+  {
+    path: 'procedimentos-inserir',
+    loadChildren: () => import('./pages/procedimentos-inserir/procedimentos-inserir.module').then( m => m.ProcedimentosInserirPageModule)
   }
 ];
 

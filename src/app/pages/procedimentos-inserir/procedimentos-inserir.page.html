@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+       <ion-menu-button color="primary"></ion-menu-button>
+     </ion-buttons>
+     <ion-title>
+       Inserir Procedimentos
+     </ion-title>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="inserirProcedimentoFormGroup" (ngSubmit)="loadProcedimento(); $event.preventDefault()">
+    <ion-list >
+      <ion-radio-group formControlName="tipo" value="tipo">
+        <ion-list-header>
+          <ion-label>Tipo de Procedimento*</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Principal</ion-label>
+          <ion-radio slot="end" value="1"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Secundário</ion-label>
+          <ion-radio slot="end" value="2"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-list >
+      <ion-radio-group formControlName="premio" value="premio">
+        <ion-list-header>
+          <ion-label>Prêmio do Procedimento*</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Pontos</ion-label>
+          <ion-radio slot="end" value="1"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Valor</ion-label>
+          <ion-radio slot="end" value="2"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-item>
+      <ion-label position="floating">Código do procedimento*</ion-label>
+      <ion-input formControlName="referenciaCodigo" type="digit" clearInput="true"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="inserirProcedimentoFormGroup.controls['referenciaCodigo'].dirty && inserirProcedimentoFormGroup.controls['referenciaCodigo'].errors" margin="left">O Código teve conter 8 dígitos</p>
+    <br/>
+    <ion-button id="open-modal" expand="block" type="submit" [disabled]="inserirProcedimentoFormGroup.invalid">Inserir Procedimento</ion-button>
+
+    <p>{{ message }}</p>
+    <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-button (click)="cancel()">Cancelar</ion-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+              <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+          <ion-button expand="block" (click)="cancel()">Mais Procedimentos</ion-button>
+      </ng-template>
+    </ion-modal>
+  </form>
+</ion-content>
+
+<!--
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Digite Código ou Descrição</ion-label>
+    <ion-input clear-input="true" clear-on-edit="true" required="true" [(ngModel)]="objeto"></ion-input>
+  </ion-item>
+  <br>
+  <ion-button id="open-modal" expand="block" (click)="analizaObjeto(objeto)">Pesquisar</ion-button>
+
+  <ion-modal  #modal trigger="open-modal">
+    <ng-template >
+      <ion-content>
+        <ion-toolbar>
+          <ion-title>Resultado</ion-title>
+          <ion-buttons slot="end">
+            <ion-button color="light" (click)="modal.dismiss()">Fechar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+
+        <ion-list>
+          <ng-container *ngIf="(varControle === true); else mostraLista">
+          <ion-item>
+            <ion-label *ngIf="guardaResposta">       ngIf adicionado para não pegar as variáveis como undefined
+              <h2>Código: {{guardaResposta.codigo}}</h2>
+              <p> <strong>Descrição:</strong> {{guardaResposta.descricao}} </p>
+              <p> <strong>Pontos:</strong> {{guardaResposta.pontos}} </p>
+              <p> <strong>Valor:</strong> {{guardaResposta.valor | currency }} </p>
+            </ion-label>
+          </ion-item>
+          </ng-container>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+          <ng-template #mostraLista>               Parte do else do ngIf do ng-container
+            <ion-item *ngFor="let item of items">
+              <ion-label>
+                <h2>Código: {{item.codigo}}</h2>
+                <p> <strong>Descrição:</strong> {{item.descricao}} </p>
+                <p> <strong>Pontos:</strong> {{item.pontos}} </p>
+                <p> <strong>Valor:</strong> {{item.valor | currency}} </p>
+              </ion-label>
+            </ion-item>
+          </ng-template>
+
+</ion-content>
+-->
