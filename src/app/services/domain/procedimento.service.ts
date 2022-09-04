@@ -1,20 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { API_CONFIG } from 'src/app/config/api.config';
-import { CirurgiaForm } from 'src/app/models/cirurgia.form';
+import { ProcedimentoForm } from 'src/app/models/procedimento.form';
+import { API_CONFIG } from '../../config/api.config';
 import { StorageService } from '../storage.service';
 
 @Injectable()
-export class CirurgiaService {
+export class ProcedimentoService {
 
     constructor(
       public http: HttpClient,
       public storage: StorageService) {
     }
 
-    insertCirurgia(obj: CirurgiaForm) {
+    insertProcedimento(obj: ProcedimentoForm) {
         return this.http.post(
-            `${API_CONFIG.baseUrl}/cirurgias`,
+            `${API_CONFIG.baseUrl}/procedimentos`,
             obj,
             {
                 observe: 'response',

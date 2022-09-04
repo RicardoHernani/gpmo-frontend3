@@ -1,3 +1,4 @@
+import { ProcedimentoService } from './services/domain/procedimento.service';
 import { CirurgiaService } from './services/domain/cirurgia.service';
 import { AuthIntercept } from './interceptors/auth-interceptor';
 import { StorageService } from './services/storage.service';
@@ -7,7 +8,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, NavParams } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +21,7 @@ import { UsuarioService } from './services/domain/usuario.service';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -37,7 +38,9 @@ import { UsuarioService } from './services/domain/usuario.service';
     AuthService,
     StorageService,
     UsuarioService,
-    CirurgiaService
+    CirurgiaService,
+    ProcedimentoService,
+    NavParams
   ],
   bootstrap: [AppComponent],
 })

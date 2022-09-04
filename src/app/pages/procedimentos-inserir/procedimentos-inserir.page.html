@@ -50,7 +50,7 @@
     <ion-button (click)="mostraPorCodigo()" id="open-modal" expand="block" type="submit" [disabled]="inserirProcedimentoFormGroup.invalid">Inserir Procedimento</ion-button>
   </form>
 
-  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+  <ion-modal trigger="open-modal">
     <ng-template>
       <ion-header>
         <ion-toolbar>
@@ -58,12 +58,12 @@
             <ion-button (click)="cancel()">Cancelar</ion-button>
           </ion-buttons>
           <ion-buttons slot="end">
-            <ion-button (click)="confirm()" [strong]="true">Finalizar</ion-button>
+            <ion-button (click)="confirm()">Finalizar</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <ion-fab (click)="cancel()" vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab (click)="addMore()" vertical="bottom" horizontal="end" slot="fixed">
           <ion-fab-button>
             <ion-icon name="add"></ion-icon>
           </ion-fab-button>
@@ -81,59 +81,3 @@
   </ion-modal>
 </ion-content>
 
-<!--
-<ion-content class="ion-padding">
-  <ion-item>
-    <ion-label position="floating">Digite Código ou Descrição</ion-label>
-    <ion-input clear-input="true" clear-on-edit="true" required="true" [(ngModel)]="objeto"></ion-input>
-  </ion-item>
-  <br>
-  <ion-button id="open-modal" expand="block" (click)="analizaObjeto(objeto)">Pesquisar</ion-button>
-
-  <ion-modal  #modal trigger="open-modal">
-    <ng-template >
-      <ion-content>
-        <ion-toolbar>
-          <ion-title>Resultado</ion-title>
-          <ion-buttons slot="end">
-            <ion-button color="light" (click)="modal.dismiss()">Fechar</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-
-        <ion-list>
-          <ng-container *ngIf="(varControle === true); else mostraLista">
-          <ion-item>
-            <ion-label *ngIf="guardaResposta">       ngIf adicionado para não pegar as variáveis como undefined
-              <h2>Código: {{guardaResposta.codigo}}</h2>
-              <p> <strong>Descrição:</strong> {{guardaResposta.descricao}} </p>
-              <p> <strong>Pontos:</strong> {{guardaResposta.pontos}} </p>
-              <p> <strong>Valor:</strong> {{guardaResposta.valor | currency }} </p>
-            </ion-label>
-          </ion-item>
-          </ng-container>
-        </ion-list>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
-
-          <ng-template #mostraLista>               Parte do else do ngIf do ng-container
-            <ion-item *ngFor="let item of items">
-              <ion-label>
-                <h2>Código: {{item.codigo}}</h2>
-                <p> <strong>Descrição:</strong> {{item.descricao}} </p>
-                <p> <strong>Pontos:</strong> {{item.pontos}} </p>
-                <p> <strong>Valor:</strong> {{item.valor | currency}} </p>
-              </ion-label>
-            </ion-item>
-          </ng-template>
-
-</ion-content>
-
-
-
-        <ion-fab (click)="cancel()" vertical="bottom" horizontal="end" slot="fixed">
-          <ion-fab-button>
-            <ion-icon name="add"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
--->

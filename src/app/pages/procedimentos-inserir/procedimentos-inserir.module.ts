@@ -14,7 +14,7 @@ import { ProcedimentosInserirPage } from './procedimentos-inserir.page';
     FormsModule,
     IonicModule,
     ProcedimentosInserirPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [ProcedimentosInserirPage]
 })

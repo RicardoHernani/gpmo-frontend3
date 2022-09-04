@@ -1,6 +1,7 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, NavParams } from '@ionic/angular';
 import { CirurgiaForm } from 'src/app/models/cirurgia.form';
 import { CirurgiaService } from 'src/app/services/domain/cirurgia.service';
 import { UsuarioService } from 'src/app/services/domain/usuario.service';
@@ -27,7 +28,9 @@ export class CirurgiasInserirPage  {
     public usuarioService: UsuarioService,
     public cirurgiaService: CirurgiaService,
     public alertCtrl: AlertController,
-    public navCtrl: NavController) {
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public router: Router) {
   }
 
   loadUsuario() {
