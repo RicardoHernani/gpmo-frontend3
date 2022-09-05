@@ -1,10 +1,11 @@
 import { ProcedimentoService } from './../../services/domain/procedimento.service';
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonModal, NavController, NavParams } from '@ionic/angular';
+import { AlertController, IonModal, NavController } from '@ionic/angular';
 import { ProcedimentoForm } from 'src/app/models/procedimento.form';
 import { ReferenciaDTO } from 'src/app/models/referencia.dto';
 import { ReferenciaService } from 'src/app/services/domain/referencia.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-procedimentos-inserir',
@@ -16,7 +17,6 @@ export class ProcedimentosInserirPage {
 
   guardaResposta: ReferenciaDTO;
   procedimento: ProcedimentoForm;
-  codCirurgia: string;
 
   inserirProcedimentoFormGroup: FormGroup= this.formBuilder.group({
     tipo: ['', [Validators.required]],
@@ -28,15 +28,14 @@ export class ProcedimentosInserirPage {
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
-    public navParams: NavParams,
     public referenciaService: ReferenciaService,
-    public procedimentoService: ProcedimentoService) {
-
-    this.codCirurgia = navParams.get('codCirurgia');
-    console.log(this.codCirurgia);
+    public procedimentoService: ProcedimentoService,
+    public route: ActivatedRoute,
+    public router: Router) {
   }
 
-  mostraPorCodigo(){
+
+  mostraReferenciaPorCodigo(){
     this.referenciaService.findByCodigo(this.inserirProcedimentoFormGroup.value.referenciaCodigo)
       .subscribe(resposta => {
         this.guardaResposta = resposta;
@@ -52,7 +51,6 @@ export class ProcedimentosInserirPage {
   confirm() {
     this.inserirProcedimento();
     this.modal.dismiss('confirm');
-    console.log('confirmado');
   }
 
   addMore() {
@@ -64,132 +62,55 @@ export class ProcedimentosInserirPage {
     this.procedimento = {
       tipo: this.inserirProcedimentoFormGroup.value.tipo,
       premio: this.inserirProcedimentoFormGroup.value.premio,
-      cirurgiaId: this.codCirurgia,
+      cirurgiaId: this.route.snapshot.queryParamMap.get('codCirurgia'), //Ver vídeo: https://www.youtube.com/watch?v=1ZbhOJ5coY4
       referenciaCodigo: this.inserirProcedimentoFormGroup.value.referenciaCodigo
     };
-    this.procedimentoService.insertProcedimento(this.procedimento);
-    console.log(this.procedimento);
+    this.saveProcedimento();
   }
 
-/*
-    inserirProcedimento() {
-      let localUser = this.storage.getLocalUser();
-      if (this.codCirurgia && localUser && localUser.email) {
-        this.procedimento = {
-          tipo: this.formGroup.value.tipo,
-          premio: this.formGroup.value.premio,
-          cirurgiaId: this.codCirurgia,
-          referenciaCodigo: this.formGroup.value.referenciaCodigo
-        };
-      }
-      else {
-          this.showInsertNotOk();
-      }
-
-      if (this.procedimento.referenciaCodigo != null) {
-        this.referenciaService.findByCodigo(this.procedimento.referenciaCodigo)
-        .subscribe(response => {
-          this.guardaResposta = response;
-          this.hasCodigo = true;
-
-
-          //this.saveProcedimento();
-        },
-        error => {
-          if (error.status == 404) {
-          }
-        });
-      }
-      else {
-        this.navCtrl.setRoot('ProcedimentosInsertPage');
-      }
-    }
-
-
-
-
-    saveProcedimento() {
-      this.procedimentoService.insertProcedimento(this.procedimento)
-        .subscribe(response => {
-        },
-        error => {
-          this.showInsertNotOk();
-        });
-    }
-
-
-    cancelarInsertProcedimento() {
-      let alert = this.alertCtrl.create({
-        title: 'Cancelado!',
-        message: 'Procedimento NÃO cadastrado. Repetir cadastro!',
-        enableBackdropDismiss: false,
-        buttons: [
-          {
-            text: 'Ok',
-            handler: () => {
-              this.inserirProcedimento();
-            }
-          }
-        ]
+  saveProcedimento() {
+    this.procedimentoService.insertProcedimento(this.procedimento)
+      .subscribe(response => {
+        this.showInsertOk();
+      },
+      error => {
+        this.showInsertNotOk();
       });
+  }
+
+  async showInsertOk() {
+    const alert = await this.alertCtrl.create({
+      header: 'Sucesso!',
+      message: 'Procedimento cadastrado',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.navCtrl.navigateForward('cirurgias-inserir');
+          }
+        }
+      ]
+    });
       alert.present();
-    }
+  }
 
-    showInsertOk() {
-      let alert = this.alertCtrl.create({
-        title: 'Sucesso!',
-        message: 'Procedimento cadastrado com sucesso!',
-        enableBackdropDismiss: false,
-        buttons: [
-          {
-            text: 'Ok',
-            handler: () => {
-              this.navCtrl.setRoot('CirurgiasInsertPage');
-            }
+  async showInsertNotOk() {
+    const alert = await this.alertCtrl.create({
+      header: 'Falhou!',
+      message: 'Procedimento NÃO cadastrado, favor repetir',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.navCtrl.navigateForward('procedimentos-inserir');
           }
-        ]
-      });
+        }
+      ]
+    });
       alert.present();
-    }
-
-    showInsertNotOk() {
-      let alert = this.alertCtrl.create({
-        title: 'Falhou!',
-        message: 'Procedimento NÃO cadastrado. Repetir cadastro!',
-        enableBackdropDismiss: false,
-        buttons: [
-          {
-            text: 'Ok',
-            handler: () => {
-              this.navCtrl.setRoot('ProcedimentosInsertPage');
-            }
-          }
-        ]
-      });
-      alert.present();
-    }
- */
-
-    async showInsertNotOk() {
-      const alert = await this.alertCtrl.create({
-        header: 'Falhou!',
-        message: 'Procedimento NÃO cadastrado',
-        backdropDismiss: false,
-        buttons: [
-          {
-            text: 'OK',
-            handler: () => {
-              this.navCtrl.navigateForward('procedimentos-inserir');
-            }
-          }
-        ]
-      });
-        alert.present();
-    }
-
-
-
-
+  }
 
 
   loadProcedimento(){

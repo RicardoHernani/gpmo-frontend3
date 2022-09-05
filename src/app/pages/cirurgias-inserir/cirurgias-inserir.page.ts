@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, NavController, NavParams } from '@ionic/angular';
@@ -82,7 +82,12 @@ export class CirurgiasInserirPage  {
         {
           text: 'OK',
           handler: () => {
-            this.navCtrl.navigateForward('procedimentos-inserir');  //O argumento deve ser igual ao arquivo de rotas
+            const navigationExtras: NavigationExtras = {
+              queryParams: {
+                codCirurgia: this.codCirurgia
+              }
+            };
+            this.router.navigate(['procedimentos-inserir'], navigationExtras); //Ver https://www.youtube.com/watch?v=1ZbhOJ5coY4
           }
         }
       ]
