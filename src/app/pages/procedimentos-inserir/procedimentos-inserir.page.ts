@@ -5,7 +5,7 @@ import { AlertController, IonModal, NavController, MenuController } from '@ionic
 import { ProcedimentoForm } from 'src/app/models/procedimento.form';
 import { ReferenciaDTO } from 'src/app/models/referencia.dto';
 import { ReferenciaService } from 'src/app/services/domain/referencia.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-procedimentos-inserir',
@@ -108,7 +108,12 @@ export class ProcedimentosInserirPage {
         {
           text: 'OK',
           handler: () => {
-            this.navCtrl.navigateForward('procedimentos-inserir');
+            const navigationExtras: NavigationExtras = {
+              queryParams: {
+                codCirurgia: this.route.snapshot.queryParamMap.get('codCirurgia')
+              }
+            };
+            this.router.navigate(['procedimentos-inserir'], navigationExtras);
           }
         }
       ]
