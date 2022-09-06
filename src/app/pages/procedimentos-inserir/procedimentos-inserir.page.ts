@@ -1,7 +1,7 @@
 import { ProcedimentoService } from './../../services/domain/procedimento.service';
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonModal, NavController } from '@ionic/angular';
+import { AlertController, IonModal, NavController, MenuController } from '@ionic/angular';
 import { ProcedimentoForm } from 'src/app/models/procedimento.form';
 import { ReferenciaDTO } from 'src/app/models/referencia.dto';
 import { ReferenciaService } from 'src/app/services/domain/referencia.service';
@@ -31,9 +31,13 @@ export class ProcedimentosInserirPage {
     public referenciaService: ReferenciaService,
     public procedimentoService: ProcedimentoService,
     public route: ActivatedRoute,
-    public router: Router) {
+    public router: Router,
+    public menu: MenuController) {
   }
 
+  ionViewWillEnter(): void {
+    this.menu.swipeGesture(false);
+  }
 
   mostraReferenciaPorCodigo(){
     this.referenciaService.findByCodigo(this.inserirProcedimentoFormGroup.value.referenciaCodigo)
