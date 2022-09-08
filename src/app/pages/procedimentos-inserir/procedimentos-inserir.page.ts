@@ -17,6 +17,7 @@ export class ProcedimentosInserirPage {
 
   guardaResposta: ReferenciaDTO;
   procedimento: ProcedimentoForm;
+  buttonType: string;
 
   inserirProcedimentoFormGroup: FormGroup= this.formBuilder.group({
     tipo: ['', [Validators.required]],
@@ -39,6 +40,26 @@ export class ProcedimentosInserirPage {
     this.menu.swipeGesture(false);
   }
 
+  onSubmit(buttonType: string): void {
+    this.procedimento = {
+      tipo: this.inserirProcedimentoFormGroup.value.tipo,
+      premio: this.inserirProcedimentoFormGroup.value.premio,
+      cirurgiaId: this.route.snapshot.queryParamMap.get('codCirurgia'), //Ver vídeo: https://www.youtube.com/watch?v=1ZbhOJ5coY4
+      referenciaCodigo: this.inserirProcedimentoFormGroup.value.referenciaCodigo
+    };
+    this.mostraReferenciaPorCodigo();
+
+    if(buttonType === 'cancel') {
+      this.cancel();
+    }
+    if(buttonType === 'confirmAndFinish') {
+      this.confirmAndFinish();
+    }
+    if(buttonType === 'addMore') {
+      this.addMore();
+    }
+  }
+
   mostraReferenciaPorCodigo(){
     this.referenciaService.findByCodigo(this.inserirProcedimentoFormGroup.value.referenciaCodigo)
       .subscribe(resposta => {
@@ -52,24 +73,14 @@ export class ProcedimentosInserirPage {
     this.modal.dismiss('cancel');
   }
 
-  confirm() {
-    this.inserirProcedimento();
+  confirmAndFinish() {
+    this.saveProcedimento();
     this.modal.dismiss('confirm');
   }
 
   addMore() {
+    this.saveMultiplosProcedimentos();
     this.modal.dismiss('addMore');
-    console.log('adicionado mais');
-  }
-
-  inserirProcedimento() {
-    this.procedimento = {
-      tipo: this.inserirProcedimentoFormGroup.value.tipo,
-      premio: this.inserirProcedimentoFormGroup.value.premio,
-      cirurgiaId: this.route.snapshot.queryParamMap.get('codCirurgia'), //Ver vídeo: https://www.youtube.com/watch?v=1ZbhOJ5coY4
-      referenciaCodigo: this.inserirProcedimentoFormGroup.value.referenciaCodigo
-    };
-    this.saveProcedimento();
   }
 
   saveProcedimento() {
@@ -77,9 +88,9 @@ export class ProcedimentosInserirPage {
       .subscribe(response => {
         this.showInsertOk();
       },
-      error => {
-        this.showInsertNotOk();
-      });
+        error => {
+          this.showInsertNotOk();
+        });
   }
 
   async showInsertOk() {
@@ -121,8 +132,53 @@ export class ProcedimentosInserirPage {
       alert.present();
   }
 
+  saveMultiplosProcedimentos() {
+    this.procedimentoService.insertProcedimento(this.procedimento)
+      .subscribe(response => {
+        this.showInsertOkMultiplos();
+      },
+        error => {
+          this.showInsertNotOkMultiplos();
+        });
+  }
 
-  loadProcedimento(){
+  async showInsertOkMultiplos() {
+    const alert = await this.alertCtrl.create({
+      header: 'Sucesso!',
+      message: 'Procedimento cadastrado',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.navCtrl.navigateForward('procedimentos-inserir');
+          }
+        }
+      ]
+    });
+      alert.present();
+  }
+
+  async showInsertNotOkMultiplos() {
+    const alert = await this.alertCtrl.create({
+      header: 'Falhou!',
+      message: 'Procedimento NÃO cadastrado, favor repetir',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            const navigationExtras: NavigationExtras = {
+              queryParams: {
+                codCirurgia: this.route.snapshot.queryParamMap.get('codCirurgia')
+              }
+            };
+            this.router.navigate(['procedimentos-inserir'], navigationExtras);
+          }
+        }
+      ]
+    });
+      alert.present();
   }
 
 }
