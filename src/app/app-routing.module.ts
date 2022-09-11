@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'procedimentos-inserir',
     loadChildren: () => import('./pages/procedimentos-inserir/procedimentos-inserir.module').then( m => m.ProcedimentosInserirPageModule)
+  },
+  {
+    path: 'cirurgias-apagar',
+    loadChildren: () => import('./pages/cirurgias-apagar/cirurgias-apagar.module').then( m => m.CirurgiasApagarPageModule)
   }
 ];
 

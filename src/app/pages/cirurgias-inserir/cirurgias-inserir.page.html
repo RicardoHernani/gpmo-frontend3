@@ -13,14 +13,14 @@
   <form [formGroup]="inserirCirurgiaFormGroup" (ngSubmit)="loadUsuario(); $event.preventDefault()">
     <ion-item>
       <ion-label position="floating">Matrícula*</ion-label>
-      <ion-input clearInput="true" formControlName="matricula" type="digit"></ion-input>
+      <ion-input clear-input="true" formControlName="matricula" type="digit"></ion-input>
     </ion-item>
     <p class="danger" *ngIf="inserirCirurgiaFormGroup.controls['matricula'].dirty && inserirCirurgiaFormGroup.controls['matricula'].errors" margin="left">Matrícula deve conter entre 6 e 9 dígitos</p>
     <br/>
     <ion-item>
       <ion-label position="floating">Data*</ion-label>
       <br>
-      <ion-input clearInput="true" formControlName="data" type="date"></ion-input>
+      <ion-input clear-input="true" formControlName="data" type="date"></ion-input>
     </ion-item>
     <br/>
     <p class="danger" *ngIf="inserirCirurgiaFormGroup.controls['data'].dirty && inserirCirurgiaFormGroup.controls['data'].errors" margin="left">Data inválida</p>
