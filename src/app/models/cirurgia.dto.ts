@@ -4,8 +4,8 @@ export interface CirurgiaDTO {
   id: string;
   matricula: string;
   data: string;
-  usuarioId: string;
+  usuarioid: string;
   procedimentos: ProcedimentoDTO[];
-  subTotalPontos: string;
-  subTotalValor: string;
+  subTotalPontos: number;
+  subTotalValor: number;
 }

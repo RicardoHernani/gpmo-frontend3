@@ -11,142 +11,122 @@
 
 <ion-content class="ion-padding">
   <ion-header>
+      <ion-item>
+        <ion-label position="floating">Digite a Data da Cirurgia</ion-label>
+        <br>
+        <ion-input clear-input="true" clear-on-edit="true" required="true" type="date"></ion-input>
+      </ion-item>
+      <br>
+      <ion-button expand="block" type="submit">Buscar Cirurgias</ion-button>
+      <br>
+  </ion-header>
 
+<div *ngFor="let cirurgia of cirurgias; let i = index">
+  <p >
+  {{cirurgia.data}}
+  </p>
+  <p>
+    {{cirurgia.matricula}}
+  </p>
+
+  <div *ngFor="let procedimento of cirurgia.procedimentos; let j = index">
+    <p>
+      {{procedimento.referencia.codigo}}
+    </p>
+  </div>
+</div>
+
+</ion-content>
+
+<!--
+<ion-content class="ion-padding">
+  <ion-header>
       <ion-item>
         <ion-label position="floating">Digite a Data da Cirurgia</ion-label>
         <br>
         <ion-input [(ngModel)]="refs.data" clear-input="true" clear-on-edit="true" required="true" type="date"></ion-input>
       </ion-item>
       <br>
-      <ion-button expand="block" [disabled]="" (click)="buscarCirurgiasPorData()">Buscar Cirurgias</ion-button>
+      <ion-button expand="block" type="submit" (click)="buscarCirurgiasPorData()">Buscar Cirurgias</ion-button>
       <br>
+  </ion-header>
 
+<div *ngFor="let cirurgia of cirurgias">
+  <p >
+  {{cirurgia.usuarioid}}
+  </p>
+  <p>
+    {{cirurgia.procedimentos}}
+  </p>
+
+  <div *ngFor="let procedimento of cirurgia.procedimentos; let i = index">
+    <p>
+    {{procedimento.referencia}}
+    </p>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+       <ion-menu-button color="primary"></ion-menu-button>
+     </ion-buttons>
+     <ion-title>
+       Apagar Cirurgia
+     </ion-title>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-header>
+      <ion-item>
+        <ion-label position="floating">Digite a Data da Cirurgia</ion-label>
+        <br>
+        <ion-input [(ngModel)]="refs.data" clear-input="true" clear-on-edit="true" required="true" type="date"></ion-input>
+      </ion-item>
+      <br>
+      <ion-button expand="block" type="submit" (click)="buscarCirurgiasPorData()">Buscar Cirurgias</ion-button>
+      <br>
   </ion-header>
 
   <ion-list>
-    <ion-item>
+    <ion-item *ngFor="let cirurgia of cirurgias; let i = index">
       <ion-card>
         <ion-item>
           <ion-checkbox slot="end"></ion-checkbox>
-          <ion-label>Matrícula: 11111111</ion-label>
+          <ion-label>{{i}} {{cirurgia.matricula}}</ion-label>
         </ion-item>
         <ion-card-content>
           Procedimentos:
-          <ion-card>
-            <ion-card-content>
-              <p><span>Código: </span>
-                <span>31303153</span>
-              </p>
-              <p><span>Descrição: </span>
-                <span>fdfdfdsfadfdasfsdfdfa</span>
-              </p>
-              <p><span>Pontos: </span>
-                <span>33</span>
-              </p>
-              <p><span>Valor: </span>
-              <span>$300,00</span>
-              </p>
-            </ion-card-content>
-          </ion-card>
-          <ion-card>
-            <ion-card-content>
-              <p><span>Código: </span>
-                <span>31303153</span>
-              </p>
-              <p><span>Descrição: </span>
-                <span>fdfdfdsfadfdasfsdfdfa</span>
-              </p>
-              <p><span>Pontos: </span>
-                <span>33</span>
-              </p>
-              <p><span>Valor: </span>
-              <span>$300,00</span>
-              </p>
-            </ion-card-content>
-          </ion-card>
-          <ion-card>
-            <ion-card-content>
-              <p><span>Código: </span>
-                <span>31303153</span>
-              </p>
-              <p><span>Descrição: </span>
-                <span>fdfdfdsfadfdasfsdfdfa</span>
-              </p>
-              <p><span>Pontos: </span>
-                <span>33</span>
-              </p>
-              <p><span>Valor: </span>
-              <span>$300,00</span>
-              </p>
-            </ion-card-content>
-          </ion-card>
-        </ion-card-content>
-      </ion-card>
-    </ion-item>
-
-    <ion-item>
-      <ion-card>
-        <ion-item>
-          <ion-checkbox slot="end"></ion-checkbox>
-          <ion-label>Matrícula: 22222222</ion-label>
-        </ion-item>
-        <ion-card-content>
-          Procedimentos:
-          <ion-card>
-            <ion-card-content>
-              <p><span>Código: </span>
-                <span>31303153</span>
-              </p>
-              <p><span>Descrição: </span>
-                <span>fdfdfdsfadfdasfsdfdfa</span>
-              </p>
-              <p><span>Pontos: </span>
-                <span>33</span>
-              </p>
-              <p><span>Valor: </span>
-              <span>$300,00</span>
-              </p>
-            </ion-card-content>
-          </ion-card>
-          <ion-card>
-            <ion-card-content>
-              <p><span>Código: </span>
-                <span>31303153</span>
-              </p>
-              <p><span>Descrição: </span>
-                <span>fdfdfdsfadfdasfsdfdfa</span>
-              </p>
-              <p><span>Pontos: </span>
-                <span>33</span>
-              </p>
-              <p><span>Valor: </span>
-              <span>$300,00</span>
-              </p>
-            </ion-card-content>
-          </ion-card>
+          <div *ngFor="let procedimento of cirurgia.procedimentos">
+            <ion-card>
+              <ion-card-content>
+                <p><span>Código: </span>
+                  <span>{{procedimento.referencia}}</span>
+                </p>
+                <p><span>Descrição: </span>
+                  <span>fdfdfdsfadfdasfsdfdfa</span>
+                </p>
+                <p><span>Pontos: </span>
+                  <span>33</span>
+                </p>
+                <p><span>Valor: </span>
+                <span>$300,00</span>
+                </p>
+              </ion-card-content>
+            </ion-card>
+          </div>
         </ion-card-content>
       </ion-card>
     </ion-item>
   </ion-list>
 </ion-content>
-
-<!--
-
-
-<form [formGroup]="inserirCirurgiaFormGroup" (ngSubmit)="loadUsuario(); $event.preventDefault()">
-  <ion-item>
-    <ion-label position="floating">Matrícula*</ion-label>
-    <ion-input clear-input="true" formControlName="matricula" type="digit"></ion-input>
-  </ion-item>
-  <p class="danger" *ngIf="inserirCirurgiaFormGroup.controls['matricula'].dirty && inserirCirurgiaFormGroup.controls['matricula'].errors" margin="left">Matrícula deve conter entre 6 e 9 dígitos</p>
-  <br/>
-  <ion-item>
-    <ion-label position="floating">Data*</ion-label>
-    <br>
-    <ion-input clear-input="true" formControlName="data" type="date"></ion-input>
-  </ion-item>
-  <br/>
-  <p class="danger" *ngIf="inserirCirurgiaFormGroup.controls['data'].dirty && inserirCirurgiaFormGroup.controls['data'].errors" margin="left">Data inválida</p>
-  <ion-button expand="block" type="submit" [disabled]="inserirCirurgiaFormGroup.invalid">Inserir Cirurgia</ion-button>
-</form>
 -->
