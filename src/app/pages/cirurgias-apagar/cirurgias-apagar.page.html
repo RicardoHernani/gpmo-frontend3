@@ -14,36 +14,6 @@
       <ion-item>
         <ion-label position="floating">Digite a Data da Cirurgia</ion-label>
         <br>
-        <ion-input clear-input="true" clear-on-edit="true" required="true" type="date"></ion-input>
-      </ion-item>
-      <br>
-      <ion-button expand="block" type="submit">Buscar Cirurgias</ion-button>
-      <br>
-  </ion-header>
-
-<div *ngFor="let cirurgia of cirurgias; let i = index">
-  <p >
-  {{cirurgia.data}}
-  </p>
-  <p>
-    {{cirurgia.matricula}}
-  </p>
-
-  <div *ngFor="let procedimento of cirurgia.procedimentos; let j = index">
-    <p>
-      {{procedimento.referencia.codigo}}
-    </p>
-  </div>
-</div>
-
-</ion-content>
-
-<!--
-<ion-content class="ion-padding">
-  <ion-header>
-      <ion-item>
-        <ion-label position="floating">Digite a Data da Cirurgia</ion-label>
-        <br>
         <ion-input [(ngModel)]="refs.data" clear-input="true" clear-on-edit="true" required="true" type="date"></ion-input>
       </ion-item>
       <br>
@@ -51,29 +21,40 @@
       <br>
   </ion-header>
 
-<div *ngFor="let cirurgia of cirurgias">
-  <p >
-  {{cirurgia.usuarioid}}
-  </p>
-  <p>
-    {{cirurgia.procedimentos}}
-  </p>
+  <ion-list *ngIf="cirurgias">   <!--Para não pegar valores undefined-->
+    <ion-item *ngFor="let cirurgia of cirurgias; let i = index;">
+      <ion-card>
+        <ion-item>
+          <ion-checkbox slot="end"></ion-checkbox>
+          <ion-label>{{cirurgia.matricula}}</ion-label>
+        </ion-item>
+        <ion-card-content>
+          Procedimentos:
+          <div *ngFor="let procedimento of cirurgia.procedimentos; let j = index;">
+            <ion-card>
+              <ion-card-content>
+                <p><span>Código: </span>
+                  <span>{{procedimento.referencia.codigo}}</span>
+                </p>
+                <p><span>Descrição: </span>
+                  <span>{{procedimento.referencia.descricao}}</span>
+                </p>
+                <p><span>Pontos: </span>
+                  <span>{{procedimento.referencia.pontos}}</span>
+                </p>
+                <p><span>Valor: </span>
+                <span>{{procedimento.referencia.valor | currency}}</span>
+                </p>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>
 
-  <div *ngFor="let procedimento of cirurgia.procedimentos; let i = index">
-    <p>
-    {{procedimento.referencia}}
-    </p>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
+<!--
 <ion-header>
   <ion-toolbar>
      <ion-buttons slot="start">
@@ -129,4 +110,5 @@
     </ion-item>
   </ion-list>
 </ion-content>
+
 -->

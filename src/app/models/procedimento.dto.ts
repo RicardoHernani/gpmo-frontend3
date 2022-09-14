@@ -3,5 +3,5 @@ import { ReferenciaDTO } from 'src/app/models/referencia.dto';
 export interface ProcedimentoDTO {
   tipo: string;
   premio: string;
-  referencia: ReferenciaDTO;
+  referencia: ReferenciaDTO;  //Um procedimento possui uma referência
 }
