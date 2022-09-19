@@ -102,7 +102,7 @@ export class ProcedimentosInserirPage {
         {
           text: 'OK',
           handler: () => {
-            this.navCtrl.navigateForward('cirurgias-inserir');
+            this.navCtrl.navigateForward('home');
           }
         }
       ]

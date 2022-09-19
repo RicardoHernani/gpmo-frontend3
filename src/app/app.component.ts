@@ -14,7 +14,7 @@ export class AppComponent {
   ];
 
   public subMenusProcedimentos = [
-    { title: 'Inserir', url: 'procedimentos-inserir', icon: 'attach'},
+    { title: 'Inserir', url: 'procedimentos-buscar-inserir', icon: 'attach'},
     { title: 'Apagar', url: 'procedimentos-apagar', icon: 'trash'}
   ];
 
