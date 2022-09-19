@@ -1,6 +1,7 @@
 import { CirurgiaDTO } from './../../models/cirurgia.dto';
 import { CirurgiaService } from 'src/app/services/domain/cirurgia.service';
 import { Component, OnInit } from '@angular/core';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cirurgias-apagar',
@@ -21,7 +22,9 @@ refs: CirurgiaDTO = {
 cirurgias: CirurgiaDTO[];
 
   constructor(
-    public cirurgiaService: CirurgiaService) {
+    public cirurgiaService: CirurgiaService,
+    public alertCtrl: AlertController,
+    public navCtrl: NavController,) {
   }
 
     ngOnInit() {
@@ -32,8 +35,44 @@ cirurgias: CirurgiaDTO[];
       .subscribe(resposta => {
         // eslint-disable-next-line @typescript-eslint/dot-notation
         this.cirurgias = (resposta['content']);
+
       },
         error => {
       });
   }
+
+  selecionarCard(i: number) {
+    this.confirmAlert(i);
+  }
+
+  async confirmAlert(i: number) {
+    const alert = await this.alertCtrl.create({
+      header: 'Apagar!!!',
+      message: 'Esta operação apagará a cirurgia selecionada e todos os seus procedimentos.',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'Confirmar',
+          handler: () => {
+            this.cirurgiaService.deleteCirurgia(this.cirurgias[i].id)
+              .subscribe(resposta => {
+                this.cirurgias = this.cirurgias.filter(           //Filtro para mostrar apenas os que não
+                  item => this.cirurgias[i].id !== item.id        // foram apagados conforme aula 56 do Denner
+                );
+              },
+                error => {
+
+              });
+          }
+        },
+        {
+          text: 'Cancelar',
+          handler: () => {
+          }
+        }
+      ]
+    });
+      alert.present();
+  }
+
 }

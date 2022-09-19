@@ -22,15 +22,15 @@
   </ion-header>
 
   <ion-list *ngIf="cirurgias">   <!--Para não pegar valores undefined-->
-    <ion-item *ngFor="let cirurgia of cirurgias; let i = index;">
-      <ion-card>
-        <ion-item>
-          <ion-checkbox slot="end"></ion-checkbox>
-          <ion-label>{{cirurgia.matricula}}</ion-label>
-        </ion-item>
+    <ion-item *ngFor="let cirurgia of cirurgias; let i = index">
+      <ion-card button (click)="selecionarCard(i)">
+          <ion-label>
+            <span>Matrícula: </span>
+            <span>{{cirurgia.matricula}}</span>
+          </ion-label>
         <ion-card-content>
-          Procedimentos:
-          <div *ngFor="let procedimento of cirurgia.procedimentos; let j = index;">
+          <p>Procedimentos:</p>
+          <div *ngFor="let procedimento of cirurgia.procedimentos">
             <ion-card>
               <ion-card-content>
                 <p><span>Código: </span>
@@ -55,60 +55,19 @@
 </ion-content>
 
 <!--
-<ion-header>
-  <ion-toolbar>
-     <ion-buttons slot="start">
-       <ion-menu-button color="primary"></ion-menu-button>
-     </ion-buttons>
-     <ion-title>
-       Apagar Cirurgia
-     </ion-title>
-   </ion-toolbar>
-</ion-header>
 
-<ion-content class="ion-padding">
-  <ion-header>
-      <ion-item>
-        <ion-label position="floating">Digite a Data da Cirurgia</ion-label>
-        <br>
-        <ion-input [(ngModel)]="refs.data" clear-input="true" clear-on-edit="true" required="true" type="date"></ion-input>
-      </ion-item>
-      <br>
-      <ion-button expand="block" type="submit" (click)="buscarCirurgiasPorData()">Buscar Cirurgias</ion-button>
-      <br>
-  </ion-header>
-
-  <ion-list>
-    <ion-item *ngFor="let cirurgia of cirurgias; let i = index">
-      <ion-card>
+ <ion-list>
+      <ion-radio-group value="tipo">
         <ion-item>
-          <ion-checkbox slot="end"></ion-checkbox>
-          <ion-label>{{i}} {{cirurgia.matricula}}</ion-label>
+          <ion-label>Principal</ion-label>
+          <ion-radio slot="end" value="1"></ion-radio>
         </ion-item>
-        <ion-card-content>
-          Procedimentos:
-          <div *ngFor="let procedimento of cirurgia.procedimentos">
-            <ion-card>
-              <ion-card-content>
-                <p><span>Código: </span>
-                  <span>{{procedimento.referencia}}</span>
-                </p>
-                <p><span>Descrição: </span>
-                  <span>fdfdfdsfadfdasfsdfdfa</span>
-                </p>
-                <p><span>Pontos: </span>
-                  <span>33</span>
-                </p>
-                <p><span>Valor: </span>
-                <span>$300,00</span>
-                </p>
-              </ion-card-content>
-            </ion-card>
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </ion-item>
+        <ion-item>
+          <ion-label>Secundário</ion-label>
+          <ion-radio slot="end" value="2"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
   </ion-list>
-</ion-content>
+
 
 -->

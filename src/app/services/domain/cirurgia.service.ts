@@ -29,4 +29,8 @@ export class CirurgiaService {
       return this.http.get<CirurgiaDTO[]>(`${API_CONFIG.baseUrl}/cirurgias/data/page?dataCirurgia=${data}`);
     }
 
+    deleteCirurgia(id: string): Observable<CirurgiaDTO> {
+      return this.http.delete<CirurgiaDTO>(`${API_CONFIG.baseUrl}/cirurgias/${id}`);
+    }
+
 }
