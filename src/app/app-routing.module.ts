@@ -38,7 +38,11 @@ const routes: Routes = [
   {
     path: 'procedimentos-buscar-inserir',
     loadChildren: () => import('./pages/procedimentos-buscar-inserir/procedimentos-buscar-inserir.module').then( m => m.ProcedimentosBuscarInserirPageModule)
+  },  {
+    path: 'procedimentos-apagar',
+    loadChildren: () => import('./pages/procedimentos-apagar/procedimentos-apagar.module').then( m => m.ProcedimentosApagarPageModule)
   }
+
 ];
 
 @NgModule({

@@ -87,7 +87,6 @@ export class CirurgiasInserirPage  {
                 codCirurgia: this.codCirurgia
               }
             };
-            console.log(this.codCirurgia);
             this.router.navigate(['procedimentos-inserir'], navigationExtras); //Ver https://www.youtube.com/watch?v=1ZbhOJ5coY4
           }
         }

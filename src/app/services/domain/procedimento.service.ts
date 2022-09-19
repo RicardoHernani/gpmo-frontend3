@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ProcedimentoDTO } from 'src/app/models/procedimento.dto';
 import { ProcedimentoForm } from 'src/app/models/procedimento.form';
 import { API_CONFIG } from '../../config/api.config';
 import { StorageService } from '../storage.service';
@@ -21,5 +23,9 @@ export class ProcedimentoService {
                 responseType: 'text'
             }
         );
+    }
+
+    deleteProcedimento(id: string): Observable<ProcedimentoDTO> {
+      return this.http.delete<ProcedimentoDTO>(`${API_CONFIG.baseUrl}/procedimentos/${id}`);
     }
 }
