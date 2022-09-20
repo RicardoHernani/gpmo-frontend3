@@ -4,11 +4,44 @@
        <ion-menu-button color="primary"></ion-menu-button>
      </ion-buttons>
      <ion-title>
-       Produção
+       Relatório - Entrada de dados
      </ion-title>
    </ion-toolbar>
 </ion-header>
 
  <ion-content class="ion-padding">
+  <form [formGroup]="inserirDadosFormGroup" (ngSubmit)="inserirDados(); $event.preventDefault()">
+    <ion-item>
+      <ion-label position="floating">Data Inicial*</ion-label>
+      <br/>
+      <ion-input clear-input="true" formControlName="dataInicial" type="date"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="inserirDadosFormGroup.controls['dataInicial'].dirty && inserirDadosFormGroup.controls['dataInicial'].errors" margin="left">A data deve ser válida</p>
+    <br/>
+    <ion-item>
+      <ion-label position="floating">Data Final*</ion-label>
+      <br/>
+      <ion-input clear-input="true" formControlName="dataFinal" type="date"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="inserirDadosFormGroup.controls['dataFinal'].dirty && inserirDadosFormGroup.controls['dataFinal'].errors" margin="left">A data deve ser válida</p>
+    <br/>
+    <ion-item>
+      <ion-label position="floating">Dias Válidos*</ion-label>
+      <br/>
+      <ion-input clear-input="true" formControlName="diasValidos" type="number" placeholder="Excluir férias, feriados, afastamentos..."></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="inserirDadosFormGroup.controls['diasValidos'].dirty && inserirDadosFormGroup.controls['diasValidos'].errors" margin="left">Deve ser entre 0 e 25 dias</p>
+    <br/>
+    <ion-item>
+      <ion-label position="floating">Pontos de chefia, preceptoria, coordenação...*</ion-label>
+      <br/>
+      <ion-input clear-input="true" formControlName="pontosExtras" type="number" placeholder="64 pontos"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="inserirDadosFormGroup.controls['pontosExtras'].dirty && inserirDadosFormGroup.controls['pontosExtras'].errors" margin="left">Deve ser entre 64 e 400</p>
+    <br/>
+    <ion-button expand="block" type="submit" [disabled]="inserirDadosFormGroup.invalid">Inserir</ion-button>
+  </form>
+
+
 
 </ion-content>
