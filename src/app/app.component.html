@@ -63,6 +63,25 @@
               </ion-accordion>
             </ion-accordion-group>
 
+            <ion-accordion-group>
+              <ion-accordion value="component">
+                <ion-item slot="header">
+                  <ion-icon slot="start" name="document-text"></ion-icon>
+                  <ion-label>Relatórios</ion-label>
+                </ion-item>
+                <ion-list slot="content">
+                  <ion-menu-toggle auto-hide="false">
+                    <ion-item lines="none" style="padding-left: 20px;" *ngFor="let sub of subMenusRelatorios" routerDirection="root" [routerLink]="[sub.url]" detail="false" routerLinkActive="selected">
+                      <ion-icon size="small" slot="start" [name]="sub.icon"></ion-icon>
+                      <ion-label>
+                        {{sub.title}}
+                      </ion-label>
+                    </ion-item>
+                  </ion-menu-toggle>
+                </ion-list>
+              </ion-accordion>
+            </ion-accordion-group>
+
             <ion-menu-toggle auto-hide="false">
               <ion-item routerDirection="root" routerLink="profile" lines="none" detail="false" [routerLinkActive]="['active-menu']">
                 <ion-icon slot="start" name="person" ></ion-icon>

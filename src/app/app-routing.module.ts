@@ -41,6 +41,10 @@ const routes: Routes = [
   },  {
     path: 'procedimentos-apagar',
     loadChildren: () => import('./pages/procedimentos-apagar/procedimentos-apagar.module').then( m => m.ProcedimentosApagarPageModule)
+  },
+  {
+    path: 'relatorios-producao',
+    loadChildren: () => import('./pages/relatorios-producao/relatorios-producao.module').then( m => m.RelatoriosProducaoPageModule)
   }
 
 ];

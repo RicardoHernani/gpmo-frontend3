@@ -18,6 +18,11 @@ export class AppComponent {
     { title: 'Apagar', url: 'procedimentos-apagar', icon: 'trash'}
   ];
 
+  public subMenusRelatorios = [
+    { title: 'Produção', url: 'relatorios-producao', icon: 'wallet'},
+    { title: 'Mock', url: 'Mock-route', icon: 'mock-icon'}
+  ];
+
   constructor(public auth: AuthService) {}
 
   logoutDetection() {
