@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -16,7 +17,8 @@ export class RelatoriosProducaoPage implements OnInit {
     });
 
   constructor(
-    public formBuilder: FormBuilder) {
+    public formBuilder: FormBuilder,
+    public navCtrl: NavController) {
   }
 
   ngOnInit() {
@@ -24,7 +26,8 @@ export class RelatoriosProducaoPage implements OnInit {
   }
 
   inserirDados() {
-
+    //lógica para enviar os dados para a página 'relatorios-producao-exibir'
+    this.navCtrl.navigateForward('relatorios-producao-exibir');
   }
 
 }
