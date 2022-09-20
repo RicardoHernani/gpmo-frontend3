@@ -46,7 +46,11 @@ procedimentos: ProcedimentoDTO[];
   }
 
   selecionarCard(i: number, j: number) {
-    this.confirmAlert(i,j);
+    if (this.cirurgias[i].procedimentos.length !== 1) {
+      this.confirmAlert(i,j);
+    } else {
+        this.noProcedimentosAlert(i);
+      }
   }
 
   async confirmAlert(i: number, j: number) {
@@ -72,6 +76,31 @@ procedimentos: ProcedimentoDTO[];
         {
           text: 'Cancelar',
           handler: () => {
+          }
+        }
+      ]
+    });
+      alert.present();
+  }
+
+  async noProcedimentosAlert(i: number) {
+    const alert = await this.alertCtrl.create({
+      header: 'Atenção!!!',
+      message: 'Todos os procedimentos para esta cirurgia foram apagados, portanto a cirurgia também será',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.cirurgiaService.deleteCirurgia(this.cirurgias[i].id)
+              .subscribe(resposta => {
+                this.cirurgias = this.cirurgias.filter(
+                  item => this.cirurgias[i].id !== item.id
+                );
+              },
+                error => {
+
+              });
           }
         }
       ]
