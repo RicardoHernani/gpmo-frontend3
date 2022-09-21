@@ -1,3 +1,6 @@
+import { CirurgiaDTO } from 'src/app/models/cirurgia.dto';
+import { CirurgiaService } from 'src/app/services/domain/cirurgia.service';
+/* eslint-disable radix */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,18 +13,29 @@ export class RelatoriosProducaoExibirPage implements OnInit {
 
   dataInicial: string = this.route.snapshot.queryParamMap.get('dataInicial');
   dataFinal: string = this.route.snapshot.queryParamMap.get('dataFinal');
-  diasValidos: string = this.route.snapshot.queryParamMap.get('diasValidos');
-  pontosExtras: string = this.route.snapshot.queryParamMap.get('pontosExtras');
+  diasValidos: number = parseInt((this.route.snapshot.queryParamMap.get('diasValidos')));
+  pontosExtras: number = parseInt((this.route.snapshot.queryParamMap.get('pontosExtras')));
+
+  cirurgias: CirurgiaDTO[];
 
   constructor(
-    public route: ActivatedRoute) {
+    public route: ActivatedRoute,
+    public cirurgiaService: CirurgiaService) {
      }
 
   ngOnInit() {
-    console.log(this.dataInicial);
-    console.log(this.dataFinal);
-    console.log(this.diasValidos);
-    console.log(this.pontosExtras);
+
   }
+
+  mostrarPorIntervaloData(){
+    this.cirurgiaService.findCirurgiasByDateInterval(this.dataInicial, this.dataFinal)
+      .subscribe(resposta => {
+        // eslint-disable-next-line @typescript-eslint/dot-notation
+        this.cirurgias = (resposta['content']);
+      },
+        error => {
+        });
+  }
+
 
 }

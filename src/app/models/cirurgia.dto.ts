@@ -1,5 +1,4 @@
 import { ProcedimentoDTO } from './procedimento.dto';
-import { ReferenciaDTO } from './referencia.dto';
 
 export interface CirurgiaDTO {
   id: string;

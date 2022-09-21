@@ -33,4 +33,8 @@ export class CirurgiaService {
       return this.http.delete<CirurgiaDTO>(`${API_CONFIG.baseUrl}/cirurgias/${id}`);
     }
 
+    findCirurgiasByDateInterval(dataInicial: string, dataFinal: string): Observable<CirurgiaDTO[]> {
+      return this.http.get<CirurgiaDTO[]>(`${API_CONFIG.baseUrl}/cirurgias/page?dataInicial=${dataInicial}&dataFinal=${dataFinal}`);
+    }
+
 }
