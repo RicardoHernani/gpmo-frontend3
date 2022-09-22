@@ -15,6 +15,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ErrorIntercept } from './interceptors/error-interceptor';
 import { UsuarioService } from './services/domain/usuario.service';
 
+import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -40,7 +42,8 @@ import { UsuarioService } from './services/domain/usuario.service';
     UsuarioService,
     CirurgiaService,
     ProcedimentoService,
-    NavParams
+    NavParams,
+    ScreenOrientation
   ],
   bootstrap: [AppComponent],
 })

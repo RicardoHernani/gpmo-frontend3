@@ -13,7 +13,7 @@ import { RelatoriosProducaoExibirPage } from './relatorios-producao-exibir.page'
     CommonModule,
     FormsModule,
     IonicModule,
-    RelatoriosProducaoExibirPageRoutingModule
+    RelatoriosProducaoExibirPageRoutingModule,
   ],
   declarations: [RelatoriosProducaoExibirPage]
 })
