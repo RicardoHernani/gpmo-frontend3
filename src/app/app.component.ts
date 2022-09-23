@@ -20,7 +20,7 @@ export class AppComponent {
 
   public subMenusRelatorios = [
     { title: 'Produção', url: 'relatorios-producao', icon: 'wallet'},
-    { title: 'Mock', url: 'Mock-route', icon: 'mock-icon'}
+    { title: 'Mock', url: 'relatorios-producao-exibir', icon: ''}
   ];
 
   constructor(public auth: AuthService) {}
