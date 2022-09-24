@@ -10,13 +10,9 @@
 <ion-content class="ion-padding">
   <ion-list>
     <ion-item-group *ngFor="let cirurgia of cirurgias; let i = index">
-      <ion-item-divider>
-        <ion-label >DATA: {{cirurgia.data}} MATRÍCULA: {{cirurgia.matricula}}</ion-label>
-      </ion-item-divider>
-
-      <ion-item-sliding *ngFor="let procedimento of cirurgia.procedimentos; let j = index">
-        <ion-item button>
-          <ion-label>Procedimento: {{j+1}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tipo: {{procedimento.tipo}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prêmio: {{procedimento.premio}}</ion-label>
+      <ion-item-sliding>
+        <ion-item class="item-slide">
+          <ion-label >DATA: {{cirurgia.data}} MATRÍCULA: {{cirurgia.matricula}}</ion-label>
         </ion-item>
         <ion-item-options side="end">
           <ion-item-option color="success">
@@ -24,28 +20,31 @@
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
-      <br>
+      <ion-accordion-group *ngFor="let procedimento of cirurgia.procedimentos; let j = index">
+        <ion-accordion value="component[j]">
+          <ion-item slot="header" color="white" lines="inset">
+            <ion-label>Procedimento: {{j+1}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tipo: {{procedimento.tipo}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prêmio: {{procedimento.premio}}</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-list>
+              <ion-item>
+                Código: {{procedimento.referencia.codigo}}
+              </ion-item>
+              <ion-item>
+                Descrição: {{procedimento.referencia.descricao}}
+              </ion-item>
+              <ion-item>
+                Pontos: {{procedimento.referencia.pontos}}&nbsp;&nbsp;&nbsp; Valor: {{procedimento.referencia.valor | currency}}
+              </ion-item>
+            </ion-list>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
     </ion-item-group>
   </ion-list>
-</ion-content>
+  <br>
+  <h6>Pontos Necessários: {{pontosNecessarios}}</h6>
+  <h6>Total de Pontos: {{totalPontos}}</h6>
+  <h6>Valor Total: {{totalValor | currency}}</h6>
 
-<!--
-<ion-accordion-group>
-  <ion-accordion value="component">
-    <ion-item slot="header">
-      <ion-icon slot="start" name="bandage"></ion-icon>
-      <ion-label>Cirurgias</ion-label>
-    </ion-item>
-    <ion-list slot="content">
-      <ion-menu-toggle auto-hide="false">
-        <ion-item lines="none" style="padding-left: 20px;" *ngFor="let sub of subMenusCirurgias" routerDirection="root" [routerLink]="[sub.url]" detail="false" routerLinkActive="selected">
-          <ion-icon size="small" slot="start" [name]="sub.icon"></ion-icon>
-          <ion-label>
-            {{sub.title}}
-          </ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-    </ion-list>
-  </ion-accordion>
-</ion-accordion-group>
--->
+</ion-content>

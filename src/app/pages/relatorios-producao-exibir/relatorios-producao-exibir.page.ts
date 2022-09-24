@@ -19,6 +19,7 @@ export class RelatoriosProducaoExibirPage implements OnInit {
   cirurgias: CirurgiaDTO[];
   totalPontos = 0;
   totalValor = 0;
+  pontosNecessarios: number;
 
   constructor(
     public route: ActivatedRoute,
@@ -32,18 +33,14 @@ export class RelatoriosProducaoExibirPage implements OnInit {
       .subscribe(resposta => {
         // eslint-disable-next-line @typescript-eslint/dot-notation
         this.cirurgias = (resposta['content']);
-        console.log(this.cirurgias);
-
       },
         error => {
         });
   }
 
   ionViewDidEnter() {
-    const pontosNecessarios = (this.diasValidos * 16) - this.pontosExtras;
+    this.pontosNecessarios = (this.diasValidos * 16) - this.pontosExtras;
     this.calcularTotais();
-    console.log(pontosNecessarios);
-    console.log(this.totalPontos, this.totalValor);
   }
 
   ionViewDidLeave() {
