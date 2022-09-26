@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { STORAGE_KEYS } from '../config/storage_keys.config';
+import { Collector } from '../models/collector';
 import { LocalUser } from '../models/local_user';
 
 @Injectable()
@@ -24,4 +25,25 @@ export class StorageService {
             localStorage.setItem(STORAGE_KEYS.localUser, JSON.stringify(obj));
         }
     }
+
+    getCollector(): Collector {
+      // eslint-disable-next-line prefer-const
+      let str = localStorage.getItem(STORAGE_KEYS.collector);
+      if (str == null) {
+          return null;
+      }
+      else {
+          return JSON.parse(str);
+      }
+  }
+
+    setCollector(obj: Collector) {
+        if (obj == null) {
+            localStorage.removeItem(STORAGE_KEYS.collector);
+        }
+        else {
+            localStorage.setItem(STORAGE_KEYS.collector, JSON.stringify(obj));
+        }
+    }
+
 }

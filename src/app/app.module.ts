@@ -1,3 +1,4 @@
+import { CollectorService } from './services/domain/collector.service';
 import { ProcedimentoService } from './services/domain/procedimento.service';
 import { CirurgiaService } from './services/domain/cirurgia.service';
 import { AuthIntercept } from './interceptors/auth-interceptor';
@@ -43,7 +44,8 @@ import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/n
     CirurgiaService,
     ProcedimentoService,
     NavParams,
-    ScreenOrientation
+    ScreenOrientation,
+    CollectorService
   ],
   bootstrap: [AppComponent],
 })

@@ -49,6 +49,10 @@ const routes: Routes = [
   {
     path: 'relatorios-producao-exibir',
     loadChildren: () => import('./pages/relatorios-producao-exibir/relatorios-producao-exibir.module').then( m => m.RelatoriosProducaoExibirPageModule)
+  },
+  {
+    path: 'collector',
+    loadChildren: () => import('./pages/collector/collector.module').then( m => m.CollectorPageModule)
   }
 
 ];

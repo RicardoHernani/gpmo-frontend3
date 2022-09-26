@@ -55,4 +55,13 @@ export class RelatoriosProducaoExibirPage implements OnInit {
     }
   }
 
+  selecionarProcedimento(i: number, j: number) {
+    const pegarCirurgiaid =this.cirurgias[i];
+    const pegarProcedimentoid = this.cirurgias[i].procedimentos[j].id;
+  }
+
 }
+
+
+
+
