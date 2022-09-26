@@ -8,5 +8,21 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-
+  <ion-list *ngFor="let item of items">
+    <ion-label>
+      Data: {{item.cirurgia.data}} Matrícula: {{item.cirurgia.matricula}}
+    </ion-label>
+    <ion-item-sliding>
+      <ion-item>
+        Código: {{item.procedimento.referencia.codigo}}
+        Descrição: {{item.procedimento.referencia.descricao}}
+      </ion-item>
+    <ion-item-options side="end">
+      <ion-item-option button (click)="deletarCirurgiaEProcedimento()" color="danger">
+        <ion-icon slot="end" name="trash"></ion-icon>
+        Apagar
+      </ion-item-option>
+    </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

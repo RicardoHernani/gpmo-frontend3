@@ -1,3 +1,5 @@
+import { CollectorService } from './../../services/domain/collector.service';
+import { ProcedimentoDTO } from 'src/app/models/procedimento.dto';
 import { CirurgiaDTO } from 'src/app/models/cirurgia.dto';
 import { CirurgiaService } from 'src/app/services/domain/cirurgia.service';
 import { Component, OnInit } from '@angular/core';
@@ -24,7 +26,8 @@ export class RelatoriosProducaoExibirPage implements OnInit {
   constructor(
     public route: ActivatedRoute,
     public cirurgiaService: CirurgiaService,
-    public screenOrientation: ScreenOrientation) {
+    public screenOrientation: ScreenOrientation,
+    public collectorService: CollectorService) {
   }
 
   ngOnInit() {
@@ -55,9 +58,8 @@ export class RelatoriosProducaoExibirPage implements OnInit {
     }
   }
 
-  selecionarProcedimento(i: number, j: number) {
-    const pegarCirurgiaid =this.cirurgias[i];
-    const pegarProcedimentoid = this.cirurgias[i].procedimentos[j].id;
+  addToCollector(procedimento: ProcedimentoDTO, cirurgia: CirurgiaDTO) {
+    this.collectorService.addProcedimento(procedimento, cirurgia);
   }
 
 }

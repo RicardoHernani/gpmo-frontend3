@@ -19,8 +19,8 @@ export class AppComponent {
   ];
 
   public subMenusRelatorios = [
-    { title: 'Produção', url: 'relatorios-producao', icon: 'wallet'},
-    { title: 'Mock', url: 'relatorios-producao-exibir', icon: ''}
+    { title: 'GPMO', url: 'relatorios-producao', icon: 'wallet'},
+    { title: 'Contestação', url: 'collector', icon: 'mail'}
   ];
 
   constructor(public auth: AuthService) {}

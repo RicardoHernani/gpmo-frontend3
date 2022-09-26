@@ -1,4 +1,6 @@
+import { CollectorService } from './../../services/domain/collector.service';
 import { Component, OnInit } from '@angular/core';
+import { CollectorItem } from 'src/app/models/collector-item';
 
 @Component({
   selector: 'app-collector',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CollectorPage implements OnInit {
 
-  constructor() { }
+  items: CollectorItem[];
+
+  constructor(
+    public collectorService: CollectorService) {
+
+     }
 
   ngOnInit() {
+    const collector = this.collectorService.getCollector();
+    this.items = collector.items;
+  }
+
+  deletarCirurgiaEProcedimento() {
+    console.log('Deletado');
   }
 
 }
