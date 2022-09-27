@@ -38,4 +38,14 @@ export class CollectorService {
     return collector;
   }
 
+  removeProcedimento(procedimento: ProcedimentoDTO, _cirurgia: CirurgiaDTO): Collector {
+    const collector = this.getCollector();
+    const position = collector.items.findIndex(x => x.procedimento.id === procedimento.id);
+    if (position !== -1) {
+      collector.items.splice(position, 1);
+    }
+    this.storage.setCollector(collector);
+    return collector;
+  }
+
 }

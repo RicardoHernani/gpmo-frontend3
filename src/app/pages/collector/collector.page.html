@@ -18,11 +18,13 @@
         Descrição: {{item.procedimento.referencia.descricao}}
       </ion-item>
     <ion-item-options side="end">
-      <ion-item-option button (click)="deletarCirurgiaEProcedimento()" color="danger">
+      <ion-item-option button (click)="excluirProcedimento(item.procedimento, item.cirurgia)" color="danger">
         <ion-icon slot="end" name="trash"></ion-icon>
         Apagar
       </ion-item-option>
     </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+  <br>
+  <ion-button size="default" expand="block">Enviar e-mail</ion-button>
 </ion-content>

@@ -19,8 +19,8 @@ export class RelatoriosProducaoExibirPage implements OnInit {
   pontosExtras: number = parseInt((this.route.snapshot.queryParamMap.get('pontosExtras')), 10);
 
   cirurgias: CirurgiaDTO[];
-  totalPontos = 0;
-  totalValor = 0;
+  totalPontos: number;
+  totalValor: number;
   pontosNecessarios: number;
 
   constructor(
@@ -51,6 +51,8 @@ export class RelatoriosProducaoExibirPage implements OnInit {
   }
 
   calcularTotais() {
+    this.totalValor = 0;
+    this.totalPontos = 0;
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i<this.cirurgias.length; i++) {
       this.totalPontos = this.cirurgias[i].subTotalPontos + this.totalPontos;

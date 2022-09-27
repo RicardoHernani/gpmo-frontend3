@@ -1,3 +1,5 @@
+import { CirurgiaDTO } from 'src/app/models/cirurgia.dto';
+import { ProcedimentoDTO } from 'src/app/models/procedimento.dto';
 import { CollectorService } from './../../services/domain/collector.service';
 import { Component, OnInit } from '@angular/core';
 import { CollectorItem } from 'src/app/models/collector-item';
@@ -21,8 +23,8 @@ export class CollectorPage implements OnInit {
     this.items = collector.items;
   }
 
-  deletarCirurgiaEProcedimento() {
-    console.log('Deletado');
+  excluirProcedimento(procedimento: ProcedimentoDTO, cirurgia: CirurgiaDTO) {
+    this.items = this.collectorService.removeProcedimento(procedimento, cirurgia).items;
   }
 
 }
