@@ -1,7 +1,7 @@
 <ion-header>
- <ion-toolbar>
+ <ion-toolbar class="header-format">
     <ion-buttons slot="start">
-      <ion-menu-button color="primary"></ion-menu-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
       Buscar Referências
@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-item>
+  <ion-item class="item-input">
     <ion-label position="floating">Digite Código ou Descrição</ion-label>
     <ion-input clear-input="true" clear-on-edit="true" required="true" [(ngModel)]="objeto"></ion-input>
   </ion-item>
@@ -53,5 +53,4 @@
               </ion-label>
             </ion-item>
           </ng-template>
-
 </ion-content>

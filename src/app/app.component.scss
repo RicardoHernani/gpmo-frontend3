@@ -15,6 +15,7 @@ ion-menu.md ion-list {
 
 ion-menu.md ion-note {
   margin-bottom: 30px;
+  color: blue;
 }
 
 ion-menu.md ion-list-header,
@@ -117,3 +118,22 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+
+ion-toolbar {
+  --background: rgb(236, 234, 234);
+  --color: blue;
+}
+
+ion-list-header {
+  --color: blue;
+}
+
+ion-menu-toggle ion-label {
+  --color: blue;
+}
+
+ion-accordion ion-label {
+  --color: blue;
+}
+
+
