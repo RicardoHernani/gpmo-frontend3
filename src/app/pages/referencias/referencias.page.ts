@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MenuController, ModalController } from '@ionic/angular';
 import { ReferenciaDTO } from 'src/app/models/referencia.dto';
 import { ReferenciaService } from 'src/app/services/domain/referencia.service';
 
@@ -8,7 +9,11 @@ import { ReferenciaService } from 'src/app/services/domain/referencia.service';
   templateUrl: './referencias.page.html',
   styleUrls: ['./referencias.page.scss'],
 })
-export class ReferenciasPage  {
+export class ReferenciasPage implements OnInit {
+
+  referenciaFormGroup: FormGroup= this.formBuilder.group({
+    objeto: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    });
 
   objeto: string;
   refs: ReferenciaDTO = {
@@ -22,17 +27,22 @@ export class ReferenciasPage  {
   varControle: boolean;
 
   constructor(
+    public formBuilder: FormBuilder,
     public referenciaService: ReferenciaService,
-    public menu: MenuController) {
+    public menu: MenuController,
+    public modal: ModalController) {
   }
 
-  analizaObjeto(objeto: string) {
-    if (parseInt(objeto, 10)) {
-      this.refs.codigo = objeto;
+  ngOnInit() {
+  }
+
+  analizaObjeto() {
+    if (parseInt(this.referenciaFormGroup.value.objeto, 10)) {
+      this.refs.codigo = this.referenciaFormGroup.value.objeto;
       this.varControle = true;
       this.mostraPorCodigo();
     } else {
-        this.refs.descricao = objeto;
+        this.refs.descricao = this.referenciaFormGroup.value.objeto;
         this.varControle = false;
         this.mostraPorDescricao();
       }
@@ -44,6 +54,7 @@ export class ReferenciasPage  {
         this.guardaResposta = resposta;
       },
         error => {
+          this.modal.dismiss();
       });
   }
 
@@ -52,6 +63,9 @@ export class ReferenciasPage  {
       .subscribe(resposta => {
         // eslint-disable-next-line @typescript-eslint/dot-notation
         this.items = (resposta['content']);
+        if(this.items.length === 0) {
+          this.modal.dismiss();
+        }
       },
         error => {
       });

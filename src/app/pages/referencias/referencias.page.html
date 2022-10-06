@@ -10,12 +10,15 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-item class="item-input">
-    <ion-label position="floating">Digite Código ou Descrição</ion-label>
-    <ion-input clear-input="true" clear-on-edit="true" required="true" [(ngModel)]="objeto"></ion-input>
-  </ion-item>
-  <br>
-  <ion-button id="open-modal" expand="block" (click)="analizaObjeto(objeto)">Pesquisar</ion-button>
+  <form [formGroup]="referenciaFormGroup" (ngSubmit)="analizaObjeto(); $event.preventDefault()">
+    <ion-item class="item-input">
+      <ion-label position="floating">Digite o Código ou Descrição</ion-label>
+      <ion-input clearInput="true" formControlName="objeto" clear-on-edit="true" type="text"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="referenciaFormGroup.controls['objeto'].dirty && referenciaFormGroup.controls['objeto'].errors">Valor inválido</p>
+    <br>
+    <ion-button id="open-modal" expand="block" type="submit" [disabled]="referenciaFormGroup.invalid">Pesquisar</ion-button>
+  </form>
 
   <ion-modal  #modal trigger="open-modal">
     <ng-template >
@@ -34,7 +37,7 @@
               <h2>Código: {{guardaResposta.codigo}}</h2>
               <p> <strong>Descrição:</strong> {{guardaResposta.descricao}} </p>
               <p> <strong>Pontos:</strong> {{guardaResposta.pontos}} </p>
-              <p> <strong>Valor:</strong> {{guardaResposta.valor | currency }} </p>
+              <p> <strong>Valor:</strong> {{guardaResposta.valor | currency:'R$ '}} </p>
             </ion-label>
           </ion-item>
           </ng-container>
@@ -49,8 +52,9 @@
                 <h2>Código: {{item.codigo}}</h2>
                 <p> <strong>Descrição:</strong> {{item.descricao}} </p>
                 <p> <strong>Pontos:</strong> {{item.pontos}} </p>
-                <p> <strong>Valor:</strong> {{item.valor | currency}} </p>
+                <p> <strong>Valor:</strong> {{item.valor | currency: 'R$ '}} </p>
               </ion-label>
             </ion-item>
           </ng-template>
+
 </ion-content>

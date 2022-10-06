@@ -37,8 +37,10 @@ const routes: Routes = [
   },
   {
     path: 'procedimentos-buscar-inserir',
-    loadChildren: () => import('./pages/procedimentos-buscar-inserir/procedimentos-buscar-inserir.module').then( m => m.ProcedimentosBuscarInserirPageModule)
-  },  {
+    loadChildren: () => import('./pages/procedimentos-buscar-inserir/procedimentos-buscar-inserir.module').
+      then( m => m.ProcedimentosBuscarInserirPageModule)
+  },
+  {
     path: 'procedimentos-apagar',
     loadChildren: () => import('./pages/procedimentos-apagar/procedimentos-apagar.module').then( m => m.ProcedimentosApagarPageModule)
   },
@@ -48,7 +50,8 @@ const routes: Routes = [
   },
   {
     path: 'relatorios-producao-exibir',
-    loadChildren: () => import('./pages/relatorios-producao-exibir/relatorios-producao-exibir.module').then( m => m.RelatoriosProducaoExibirPageModule)
+    loadChildren: () => import('./pages/relatorios-producao-exibir/relatorios-producao-exibir.module').
+      then( m => m.RelatoriosProducaoExibirPageModule)
   },
   {
     path: 'collector',
