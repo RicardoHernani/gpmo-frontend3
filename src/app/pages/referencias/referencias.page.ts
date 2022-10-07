@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MenuController, ModalController } from '@ionic/angular';
+import { MenuController, ModalController, AlertController } from '@ionic/angular';
 import { ReferenciaDTO } from 'src/app/models/referencia.dto';
 import { ReferenciaService } from 'src/app/services/domain/referencia.service';
 
@@ -30,7 +30,8 @@ export class ReferenciasPage implements OnInit {
     public formBuilder: FormBuilder,
     public referenciaService: ReferenciaService,
     public menu: MenuController,
-    public modal: ModalController) {
+    public modal: ModalController,
+    public alertCtrl: AlertController) {
   }
 
   ngOnInit() {
@@ -65,10 +66,25 @@ export class ReferenciasPage implements OnInit {
         this.items = (resposta['content']);
         if(this.items.length === 0) {
           this.modal.dismiss();
+          this.notFindDescricao();
         }
       },
         error => {
       });
+  }
+
+  async notFindDescricao() {
+    const alert = await this.alertCtrl.create({
+      header: 'Erro 404:',
+      message: 'Descrição não encontrada',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'OK'
+        }
+      ]
+    });
+      alert.present();
   }
 
 }
