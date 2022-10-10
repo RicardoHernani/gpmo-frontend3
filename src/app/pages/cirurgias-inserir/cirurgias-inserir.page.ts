@@ -12,7 +12,7 @@ import { StorageService } from 'src/app/services/storage.service';
   templateUrl: './cirurgias-inserir.page.html',
   styleUrls: ['./cirurgias-inserir.page.scss'],
 })
-export class CirurgiasInserirPage  {
+export class CirurgiasInserirPage {
 
   cirurgia: CirurgiaForm;
   codCirurgia: string;
@@ -31,6 +31,10 @@ export class CirurgiasInserirPage  {
     public navCtrl: NavController,
     public navParams: NavParams,
     public router: Router) {
+  }
+
+  ionViewWillEnter() {
+    this.inserirCirurgiaFormGroup.reset();
   }
 
   loadUsuario() {

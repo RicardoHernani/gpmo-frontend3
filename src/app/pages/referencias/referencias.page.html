@@ -13,14 +13,14 @@
   <form [formGroup]="referenciaFormGroup" (ngSubmit)="analizaObjeto(); $event.preventDefault()">
     <ion-item class="item-input">
       <ion-label position="floating">Digite o Código ou Descrição</ion-label>
-      <ion-input clearInput="true" formControlName="objeto" clear-on-edit="true" type="text"></ion-input>
+      <ion-input clearInput="true" formControlName="objeto" type="text"></ion-input>
     </ion-item>
     <p class="danger" *ngIf="referenciaFormGroup.controls['objeto'].dirty && referenciaFormGroup.controls['objeto'].errors">Valor inválido</p>
     <br>
     <ion-button id="open-modal" expand="block" type="submit" [disabled]="referenciaFormGroup.invalid">Pesquisar</ion-button>
   </form>
 
-  <ion-modal  #modal trigger="open-modal">
+  <ion-modal #modal trigger="open-modal">
     <ng-template >
       <ion-content>
         <ion-toolbar>

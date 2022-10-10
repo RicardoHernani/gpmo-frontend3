@@ -65,10 +65,10 @@
           </ion-fab>
           <ion-item >
             <ion-label *ngIf="guardaResposta">
-              <h2>Código: {{guardaResposta.codigo}}</h2>
+              <h2 class="titulo"><strong>Código: {{guardaResposta.codigo}}</strong></h2>
               <p> <strong>Descrição:</strong> {{guardaResposta.descricao}} </p>
               <p> <strong>Pontos:</strong> {{guardaResposta.pontos}} </p>
-              <p> <strong>Valor:</strong> {{guardaResposta.valor | currency }} </p>
+              <p> <strong>Valor:</strong> {{guardaResposta.valor | currency:'R$ ' }} </p>
             </ion-label>
           </ion-item>
         </ion-content>

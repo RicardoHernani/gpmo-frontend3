@@ -1,5 +1,5 @@
 import { ProcedimentoService } from './../../services/domain/procedimento.service';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, IonModal, NavController, MenuController } from '@ionic/angular';
 import { ProcedimentoForm } from 'src/app/models/procedimento.form';
@@ -52,9 +52,11 @@ export class ProcedimentosInserirPage {
     if(buttonType === 'cancel') {
       this.cancel();
     }
+
     if(buttonType === 'confirmAndFinish') {
       this.confirmAndFinish();
     }
+
     if(buttonType === 'addMore') {
       this.addMore();
     }
@@ -66,6 +68,7 @@ export class ProcedimentosInserirPage {
         this.guardaResposta = resposta;
       },
         error => {
+          this.modal.dismiss();
       });
   }
 
@@ -102,7 +105,7 @@ export class ProcedimentosInserirPage {
         {
           text: 'OK',
           handler: () => {
-            this.navCtrl.navigateForward('home');
+            this.navCtrl.navigateForward('cirurgias-inserir');
           }
         }
       ]
@@ -152,6 +155,7 @@ export class ProcedimentosInserirPage {
           text: 'OK',
           handler: () => {
             this.navCtrl.navigateForward('procedimentos-inserir');
+            this.inserirProcedimentoFormGroup.reset();
           }
         }
       ]
