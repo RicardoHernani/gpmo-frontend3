@@ -35,6 +35,9 @@ cirurgias: CirurgiaDTO[];
       .subscribe(resposta => {
         // eslint-disable-next-line @typescript-eslint/dot-notation
         this.cirurgias = (resposta['content']);
+        if (this.cirurgias.length === 0) {
+          this.notFindCirurgias();
+        }
 
       },
         error => {
@@ -69,6 +72,20 @@ cirurgias: CirurgiaDTO[];
           text: 'Cancelar',
           handler: () => {
           }
+        }
+      ]
+    });
+      alert.present();
+  }
+
+  async notFindCirurgias() {
+    const alert = await this.alertCtrl.create({
+      header: 'Não encontrado',
+      message: 'Não foi encontrada nenhuma cirurgia para esta data. Favor repetir a busca',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'OK'
         }
       ]
     });
