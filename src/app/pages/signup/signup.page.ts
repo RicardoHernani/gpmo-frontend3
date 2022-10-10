@@ -23,18 +23,23 @@ export class SignupPage {
     public navCtrl: NavController) {
   }
 
+  ionViewWillEnter() {
+    this.signupFormGroup.reset();
+  }
+
   signupUser() {
     this.usuarioService.insert(this.signupFormGroup.value)
       .subscribe(response => {
         this.showInsertOk();
       },
-      error =>{});
+      error =>{
+      });
   }
 
   async showInsertOk() {
     const alert = await this.alertCtrl.create({
       header: 'Sucesso!',
-      message: 'Cadastro realizado com sucesso',
+      message: 'Conta cadastrada com sucesso',
       backdropDismiss: false,
       buttons: [
         {

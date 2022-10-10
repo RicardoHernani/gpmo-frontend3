@@ -13,17 +13,17 @@
       <ion-label position="floating">Nome*</ion-label>
       <ion-input clearInput="true" formControlName="nome" type="text"></ion-input>
     </ion-item>
-    <p class="danger" *ngIf="signupFormGroup.controls['nome'].dirty && signupFormGroup.controls['nome'].errors">Valor inválido</p>
+    <p class="danger" *ngIf="signupFormGroup.controls['nome'].dirty && signupFormGroup.controls['nome'].errors">O nome de usário deve conter entre 3 e 10 caracteres</p>
     <ion-item>
       <ion-label position="floating">Email*</ion-label>
       <ion-input clearInput="true" formControlName="email" type="email"></ion-input>
     </ion-item>
-    <p class="danger" *ngIf="signupFormGroup.controls['email'].dirty && signupFormGroup.controls['email'].errors">Valor inválido</p>
+    <p class="danger" *ngIf="signupFormGroup.controls['email'].dirty && signupFormGroup.controls['email'].errors">O email deve ser válido</p>
     <ion-item>
       <ion-label position="floating">Senha*</ion-label>
       <ion-input clearInput="true" formControlName="senha" type="password"></ion-input>
     </ion-item>
-    <p class="danger" *ngIf="signupFormGroup.controls['senha'].dirty && signupFormGroup.controls['senha'].errors">Valor inválido</p>
+    <p class="danger" *ngIf="signupFormGroup.controls['senha'].dirty && signupFormGroup.controls['senha'].errors">A senha deve conter entre 6 e 10 caracteres</p>
     <br>
     <ion-button expand="block" type="submit" [disabled]="signupFormGroup.invalid">Criar conta</ion-button>
   </form>
