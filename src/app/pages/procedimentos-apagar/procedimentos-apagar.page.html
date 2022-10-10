@@ -23,15 +23,15 @@
 
   <ion-list *ngIf="cirurgias">   <!--Para não pegar valores undefined-->
     <ion-item *ngFor="let cirurgia of cirurgias; let i = index">
-      <ion-card>
+      <ion-card class="card-externo">
           <ion-label>
-            <span>Matrícula: </span>
+            <span class="matricula">Matrícula: </span>
             <span>{{cirurgia.matricula}}</span>
           </ion-label>
         <ion-card-content>
           <p>Procedimentos:</p>
           <div *ngFor="let procedimento of cirurgia.procedimentos; let j = index">
-            <ion-card button (click)="selecionarCard(i,j)">
+            <ion-card class="card-interno" button (click)="selecionarCard(i,j)">
               <ion-card-content>
                 <p><span>Código: </span>
                   <span>{{procedimento.referencia.codigo}}</span>
@@ -43,7 +43,13 @@
                   <span>{{procedimento.referencia.pontos}}</span>
                 </p>
                 <p><span>Valor: </span>
-                <span>{{procedimento.referencia.valor | currency}}</span>
+                <span>{{procedimento.referencia.valor | currency: 'R$ '}}</span>
+                </p>
+                <p><span>Tipo: </span>
+                  <span>{{procedimento.tipo}}</span>
+                </p>
+                <p><span>Prêmio: </span>
+                  <span>{{procedimento.premio}}</span>
                 </p>
               </ion-card-content>
             </ion-card>
