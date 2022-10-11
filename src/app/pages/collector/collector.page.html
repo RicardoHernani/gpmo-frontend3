@@ -9,22 +9,22 @@
 
 <ion-content class="ion-padding">
   <ion-list *ngFor="let item of items">
-    <ion-label>
-      Data: {{item.cirurgia.data}} Matrícula: {{item.cirurgia.matricula}}
+    <ion-label class="label">
+      <strong>Data: {{item.cirurgia.data}} - Matrícula: {{item.cirurgia.matricula}}</strong>
     </ion-label>
     <ion-item-sliding>
       <ion-item>
-        Código: {{item.procedimento.referencia.codigo}}
+        Código: {{item.procedimento.referencia.codigo}} -
         Descrição: {{item.procedimento.referencia.descricao}}
       </ion-item>
-    <ion-item-options side="end">
-      <ion-item-option button (click)="excluirProcedimento(item.procedimento, item.cirurgia)" color="danger">
-        <ion-icon slot="end" name="trash"></ion-icon>
-        Apagar
-      </ion-item-option>
-    </ion-item-options>
+      <ion-item-options side="end">
+        <ion-item-option button (click)="excluirProcedimento(item.procedimento, item.cirurgia)" color="danger">
+          <ion-icon slot="end" name="trash"></ion-icon>
+          Apagar
+        </ion-item-option>
+      </ion-item-options>
     </ion-item-sliding>
   </ion-list>
   <br>
-  <ion-button size="default" expand="block">Enviar e-mail</ion-button>
+  <ion-button size="default" expand="block">Enviar e-mail de cobrança</ion-button>
 </ion-content>

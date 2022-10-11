@@ -80,7 +80,7 @@ cirurgias: CirurgiaDTO[];
 
   async notFindCirurgias() {
     const alert = await this.alertCtrl.create({
-      header: 'Não encontrado',
+      header: 'Não encontrado!',
       message: 'Não foi encontrada nenhuma cirurgia para esta data. Favor repetir a busca',
       backdropDismiss: false,
       buttons: [
