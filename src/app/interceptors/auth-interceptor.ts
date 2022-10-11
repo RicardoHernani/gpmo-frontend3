@@ -8,18 +8,15 @@ import { API_CONFIG } from '../config/api.config';
 @Injectable()
 export class AuthIntercept implements HttpInterceptor {
 
-  constructor(public storage: StorageService) {
+  constructor(
+    public storage: StorageService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-      // eslint-disable-next-line prefer-const
-      let localUser = this.storage.getLocalUser();
-
-      // eslint-disable-next-line prefer-const
-      let n = API_CONFIG.baseUrl.length;
-      // eslint-disable-next-line prefer-const
-      let requestToAPI = request.url.substring(0, n) === API_CONFIG.baseUrl;
+      const localUser = this.storage.getLocalUser();
+      const n = API_CONFIG.baseUrl.length;
+      const requestToAPI = request.url.substring(0, n) === API_CONFIG.baseUrl;
 
       if (localUser && requestToAPI) {
           const authReq = request.clone({headers: request.headers.set('Authorization', 'Bearer ' + localUser.token)});

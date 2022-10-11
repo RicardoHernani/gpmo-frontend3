@@ -9,45 +9,43 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable()
 export class AuthService {
 
-    jwtHelper: JwtHelperService = new JwtHelperService();
+  jwtHelper: JwtHelperService = new JwtHelperService();
 
-    constructor(
-      public http: HttpClient,
-      public storage: StorageService) {
-    }
+  constructor(
+    public http: HttpClient,
+    public storage: StorageService) {
+  }
 
-    authenticate(creds: CredenciaisDTO) {
-      return this.http.post(
-        `${API_CONFIG.baseUrl}/login`,
-        creds,
-        {
-          observe: 'response',
-          responseType: 'text'
-        });
-    }
+  authenticate(creds: CredenciaisDTO) {
+    return this.http.post(
+      `${API_CONFIG.baseUrl}/login`,
+      creds,
+      {
+        observe: 'response',
+        responseType: 'text'
+      });
+  }
 
-    refreshToken() {
-      return this.http.post(
-        `${API_CONFIG.baseUrl}/auth/refresh_token`,
-        {},
-        {
-          observe: 'response',
-          responseType: 'text'
-        });
-    }
+  refreshToken() {
+    return this.http.post(
+      `${API_CONFIG.baseUrl}/auth/refresh_token`,
+      {},
+      {
+        observe: 'response',
+        responseType: 'text'
+      });
+  }
 
-    successfulLogin(authorizationValue: string) {
-      // eslint-disable-next-line prefer-const
-      let tok = authorizationValue.substring(7);
-      // eslint-disable-next-line prefer-const
-      let user: LocalUser = {
-        token: tok,
-        email: this.jwtHelper.decodeToken(tok).sub
-      };
-      this.storage.setLocalUser(user);
-    }
+  successfulLogin(authorizationValue: string) {
+    const tok = authorizationValue.substring(7);
+    const user: LocalUser = {
+      token: tok,
+      email: this.jwtHelper.decodeToken(tok).sub
+    };
+    this.storage.setLocalUser(user);
+  }
 
-    logout() {
-      this.storage.setLocalUser(null);
-    }
+  logout() {
+    this.storage.setLocalUser(null);
+  }
 }

@@ -49,9 +49,8 @@ export class ErrorIntercept implements HttpInterceptor {
                     this.handle422(errorObj);
                     break;
 
-                    case 500:      //Acrescentei a mensagem com o if para o erro 500 não ficar genérico demais
-                      if (errorObj.message ==='Cannot invoke \"com.ricardochaves.security.UserSS.getUsername()\" because \"user\" is null'){
-                        this.handle500();}
+                    case 500:
+                    this.handle500();
                     break;
 
                     default:

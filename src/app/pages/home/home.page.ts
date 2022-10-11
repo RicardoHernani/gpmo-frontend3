@@ -31,7 +31,8 @@ export class HomePage {
         this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.navigateForward('referencias');
       },
-      error => {});
+      error => {
+      });
   }
 
   login() {
@@ -40,7 +41,8 @@ export class HomePage {
         this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.navigateForward('referencias');
       },
-      error => {});
+      error => {
+      });
   }
 
   signup() {
