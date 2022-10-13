@@ -5,6 +5,7 @@ import { CirurgiaService } from 'src/app/services/domain/cirurgia.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-relatorios-producao-exibir',
@@ -27,17 +28,21 @@ export class RelatoriosProducaoExibirPage implements OnInit {
     public route: ActivatedRoute,
     public cirurgiaService: CirurgiaService,
     public screenOrientation: ScreenOrientation,
-    public collectorService: CollectorService) {
+    public collectorService: CollectorService,
+    public loadingCtrl: LoadingController ) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     //this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    await this.showLoading();
     this.cirurgiaService.findCirurgiasByDateInterval(this.dataInicial, this.dataFinal)
-      .subscribe(resposta => {
+      .subscribe(async resposta => {
+        await this.loadingCtrl.dismiss();
         // eslint-disable-next-line @typescript-eslint/dot-notation
         this.cirurgias = (resposta['content']);
       },
-        error => {
+        async error => {
+          await this.loadingCtrl.dismiss();
         });
   }
 
@@ -62,6 +67,15 @@ export class RelatoriosProducaoExibirPage implements OnInit {
 
   addToCollector(procedimento: ProcedimentoDTO, cirurgia: CirurgiaDTO) {
     this.collectorService.addProcedimento(procedimento, cirurgia);
+  }
+
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Aguarde...',
+    });
+
+    loading.present();
+    return loading;
   }
 
 }
