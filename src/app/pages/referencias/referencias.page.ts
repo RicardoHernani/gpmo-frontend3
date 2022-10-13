@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MenuController, ModalController, AlertController } from '@ionic/angular';
+import { MenuController, ModalController, AlertController, LoadingController } from '@ionic/angular';
 import { ReferenciaDTO } from 'src/app/models/referencia.dto';
 import { ReferenciaService } from 'src/app/services/domain/referencia.service';
 
@@ -31,7 +31,8 @@ export class ReferenciasPage implements OnInit {
     public referenciaService: ReferenciaService,
     public menu: MenuController,
     public modal: ModalController,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController) {
   }
 
   ngOnInit() {
@@ -59,17 +60,20 @@ export class ReferenciasPage implements OnInit {
       });
   }
 
-  mostraPorDescricao(){
+  async mostraPorDescricao() {
+     await this.showLoading();
     this.referenciaService.findByDescricao(this.refs.descricao)
-      .subscribe(resposta => {
+      .subscribe(async resposta => {
+        await this.loadingCtrl.dismiss();
         // eslint-disable-next-line @typescript-eslint/dot-notation
         this.items = (resposta['content']);
-        if(this.items.length === 0) {
+        if (this.items.length === 0) {
           this.modal.dismiss();
           this.notFindDescricao();
         }
       },
-        error => {
+        async error => {
+          await this.loadingCtrl.dismiss();
       });
   }
 
@@ -87,4 +91,12 @@ export class ReferenciasPage implements OnInit {
       alert.present();
   }
 
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Aguarde...',
+    });
+
+    loading.present();
+    return loading;
+  }
 }

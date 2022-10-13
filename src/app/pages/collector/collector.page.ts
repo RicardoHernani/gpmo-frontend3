@@ -15,8 +15,7 @@ export class CollectorPage implements OnInit {
 
   constructor(
     public collectorService: CollectorService) {
-
-     }
+    }
 
   ngOnInit() {
     const collector = this.collectorService.getCollector();

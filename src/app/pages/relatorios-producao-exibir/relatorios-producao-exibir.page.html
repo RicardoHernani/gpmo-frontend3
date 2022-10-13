@@ -45,10 +45,10 @@
   <br>
   <h6>Pontos Necessários: {{pontosNecessarios}}</h6>
   <h6>Total de Pontos: {{totalPontos}}</h6>
-  <h6>Valor Total: {{totalValor | currency}}</h6>
+  <h6>Valor Total: {{totalValor | currency: 'R$ '}}</h6>
   <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button routerLink="/collector">
-      <ion-icon name="mail-outline"></ion-icon>
+      <ion-icon name="file-tray-full-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
