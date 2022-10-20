@@ -92,7 +92,7 @@ procedimentos: ProcedimentoDTO[];
       backdropDismiss: false,
       buttons: [
         {
-          text: 'OK',
+          text: 'Confirmar',
           handler: () => {
             this.cirurgiaService.deleteCirurgia(this.cirurgias[i].id)
               .subscribe(resposta => {
@@ -104,6 +104,11 @@ procedimentos: ProcedimentoDTO[];
 
               });
           }
+        },
+        {
+          text: 'Cancelar',
+          handler: () => {
+          }
         }
       ]
     });
@@ -113,7 +118,7 @@ procedimentos: ProcedimentoDTO[];
   async notFindCirurgias() {
     const alert = await this.alertCtrl.create({
       header: 'Não encontrado!',
-      message: 'Não foi encontrada nenhuma cirurgia para esta data. Favor repetir a busca',
+      message: ' Nenhuma cirurgia foi encontrada para esta data. Favor repetir a busca',
       backdropDismiss: false,
       buttons: [
         {

@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'GpmoFrontEnd3',
+  appId: 'br.com.rhac',
+  appName: 'GPMO',
   webDir: 'www',
   bundledWebRuntime: false
 };

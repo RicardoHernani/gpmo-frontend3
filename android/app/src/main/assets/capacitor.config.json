@@ -1,0 +1,6 @@
+{
+	"appId": "br.com.rhac",
+	"appName": "GPMO",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
