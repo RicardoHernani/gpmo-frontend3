@@ -1,6 +1,6 @@
 import { CredenciaisDTO } from './../../models/credenciais.dto';
 import { Component } from '@angular/core';
-import { MenuController, NavController } from '@ionic/angular';
+import { LoadingController, MenuController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -37,7 +37,7 @@ export class HomePage {
 
   login() {
     this.auth.authenticate(this.creds)
-      .subscribe(response => {
+      .subscribe(async response => {
         this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.navigateForward('referencias');
       },

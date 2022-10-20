@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { CirurgiaDTO } from 'src/app/models/cirurgia.dto';
 import { CirurgiaService } from 'src/app/services/domain/cirurgia.service';
 
@@ -27,22 +27,26 @@ export class ProcedimentosBuscarInserirPage implements OnInit {
     public cirurgiaService: CirurgiaService,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
-    public router: Router) {
+    public router: Router,
+    public loadingCtrl: LoadingController) {
    }
 
   ngOnInit() {
   }
 
-  buscarCirurgiasPorData() {
+  async buscarCirurgiasPorData() {
+    await this.showLoading();
     this.cirurgiaService.findCirurgiasByDate(this.refs.data)
-      .subscribe(resposta => {
+      .subscribe(async resposta => {
+        await this.loadingCtrl.dismiss();
         // eslint-disable-next-line @typescript-eslint/dot-notation
         this.cirurgias = (resposta['content']);
         if (this.cirurgias.length === 0) {
           this.notFindCirurgias();
         }
       },
-        error => {
+        async error => {
+          await this.loadingCtrl.dismiss();
       });
   }
 
@@ -91,6 +95,15 @@ export class ProcedimentosBuscarInserirPage implements OnInit {
       ]
     });
       alert.present();
+  }
+
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Aguarde...',
+    });
+
+    loading.present();
+    return loading;
   }
 
 }

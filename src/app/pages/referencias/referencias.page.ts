@@ -61,7 +61,7 @@ export class ReferenciasPage implements OnInit {
   }
 
   async mostraPorDescricao() {
-     await this.showLoading();
+    await this.showLoading();
     this.referenciaService.findByDescricao(this.refs.descricao)
       .subscribe(async resposta => {
         await this.loadingCtrl.dismiss();

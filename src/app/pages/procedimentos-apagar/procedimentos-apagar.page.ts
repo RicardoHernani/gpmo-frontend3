@@ -1,6 +1,6 @@
 import { ProcedimentoService } from './../../services/domain/procedimento.service';
 import { Component, OnInit } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { CirurgiaDTO } from 'src/app/models/cirurgia.dto';
 import { CirurgiaService } from 'src/app/services/domain/cirurgia.service';
 import { ProcedimentoDTO } from 'src/app/models/procedimento.dto';
@@ -28,22 +28,26 @@ procedimentos: ProcedimentoDTO[];
     public cirurgiaService: CirurgiaService,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
-    public procedimentoService: ProcedimentoService) {
+    public procedimentoService: ProcedimentoService,
+    public loadingCtrl: LoadingController) {
   }
 
   ngOnInit() {
   }
 
-  buscarCirurgiasPorData() {
+  async buscarCirurgiasPorData() {
+    await this.showLoading();
     this.cirurgiaService.findCirurgiasByDate(this.refs.data)
-      .subscribe(resposta => {
+      .subscribe(async resposta => {
+        await this.loadingCtrl.dismiss();
         // eslint-disable-next-line @typescript-eslint/dot-notation
         this.cirurgias = (resposta['content']);
         if (this.cirurgias.length === 0) {
           this.notFindCirurgias();
         }
       },
-        error => {
+       async error => {
+        await this.loadingCtrl.dismiss();
       });
   }
 
@@ -127,6 +131,15 @@ procedimentos: ProcedimentoDTO[];
       ]
     });
       alert.present();
+  }
+
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Aguarde...',
+    });
+
+    loading.present();
+    return loading;
   }
 
 }
