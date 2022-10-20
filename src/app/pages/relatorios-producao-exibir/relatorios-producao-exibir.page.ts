@@ -40,15 +40,12 @@ export class RelatoriosProducaoExibirPage implements OnInit {
         await this.loadingCtrl.dismiss();
         // eslint-disable-next-line @typescript-eslint/dot-notation
         this.cirurgias = (resposta['content']);
+        this.pontosNecessarios = (this.diasValidos * 16) - this.pontosExtras;
+        this.calcularTotais();
       },
         async error => {
           await this.loadingCtrl.dismiss();
         });
-  }
-
-  ionViewDidEnter() {
-    this.pontosNecessarios = (this.diasValidos * 16) - this.pontosExtras;
-    this.calcularTotais();
   }
 
   ionViewDidLeave() {
@@ -59,7 +56,7 @@ export class RelatoriosProducaoExibirPage implements OnInit {
     this.totalValor = 0;
     this.totalPontos = 0;
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
-    for (let i = 0; i<this.cirurgias.length; i++) {
+     for (let i = 0; i<this.cirurgias.length; i++) {
       this.totalPontos = this.cirurgias[i].subTotalPontos + this.totalPontos;
       this.totalValor = this.cirurgias[i].subTotalValor + this.totalValor;
     }

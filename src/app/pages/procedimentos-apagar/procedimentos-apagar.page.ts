@@ -31,7 +31,7 @@ procedimentos: ProcedimentoDTO[];
     public procedimentoService: ProcedimentoService) {
   }
 
-    ngOnInit() {
+  ngOnInit() {
   }
 
   buscarCirurgiasPorData() {
