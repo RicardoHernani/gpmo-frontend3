@@ -33,7 +33,7 @@ export class RelatoriosProducaoExibirPage implements OnInit {
   }
 
   async ngOnInit() {
-    //this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
     await this.showLoading();
     this.cirurgiaService.findCirurgiasByDateInterval(this.dataInicial, this.dataFinal)
       .subscribe(async resposta => {
@@ -49,7 +49,7 @@ export class RelatoriosProducaoExibirPage implements OnInit {
   }
 
   ionViewDidLeave() {
-    //this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
   }
 
   calcularTotais() {
