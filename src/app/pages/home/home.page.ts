@@ -18,30 +18,37 @@ export class HomePage {
   constructor(
     public menu: MenuController,
     public navCtrl: NavController,
-    public auth: AuthService) {
+    public auth: AuthService,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewWillEnter(): void {
     this.menu.swipeGesture(false);
   }
 
-  ionViewDidEnter() {
+  async ionViewDidEnter() {
+    await this.showLoading();
     this.auth.refreshToken()
-      .subscribe(response => {
+      .subscribe(async response => {
+        await this.loadingCtrl.dismiss();
         this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.navigateForward('referencias');
       },
-      error => {
+      async error => {
+        await this.loadingCtrl.dismiss();
       });
   }
 
-  login() {
+  async login() {
+    await this.showLoading();
     this.auth.authenticate(this.creds)
       .subscribe(async response => {
+        await this.loadingCtrl.dismiss();
         this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.navigateForward('referencias');
       },
-      error => {
+      async error => {
+        await this.loadingCtrl.dismiss();
       });
   }
 
@@ -49,4 +56,12 @@ export class HomePage {
     this.navCtrl.navigateForward('signup');
   }
 
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Aguarde...',
+    });
+
+    loading.present();
+    return loading;
+  }
 }
