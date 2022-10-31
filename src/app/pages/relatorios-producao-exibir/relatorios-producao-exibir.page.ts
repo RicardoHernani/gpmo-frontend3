@@ -40,7 +40,7 @@ export class RelatoriosProducaoExibirPage implements OnInit {
         await this.loadingCtrl.dismiss();
         // eslint-disable-next-line @typescript-eslint/dot-notation
         this.cirurgias = (resposta['content']);
-        this.pontosNecessarios = (this.diasValidos * 16) - this.pontosExtras;
+        this.pontosNecessarios = (this.diasValidos * 16);
         this.calcularTotais();
       },
         async error => {
@@ -54,7 +54,7 @@ export class RelatoriosProducaoExibirPage implements OnInit {
 
   calcularTotais() {
     this.totalValor = 0;
-    this.totalPontos = 0;
+    this.totalPontos = this.pontosExtras;
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
      for (let i = 0; i<this.cirurgias.length; i++) {
       this.totalPontos = this.cirurgias[i].subTotalPontos + this.totalPontos;
