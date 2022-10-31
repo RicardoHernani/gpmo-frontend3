@@ -1,5 +1,5 @@
 import { ProcedimentoService } from './../../services/domain/procedimento.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, IonModal, NavController, MenuController } from '@ionic/angular';
 import { ProcedimentoForm } from 'src/app/models/procedimento.form';
