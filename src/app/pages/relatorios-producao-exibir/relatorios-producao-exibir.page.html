@@ -17,7 +17,9 @@
         <ion-item-sliding>
           <ion-accordion value="component[j]">
             <ion-item slot="header" color="white" lines="inset">
-              <ion-label>Procedimento: {{j+1}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tipo: {{procedimento.tipo}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prêmio: {{procedimento.premio}}</ion-label>
+              <ion-label>
+                <div class="title-color">{{j+1}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tipo: {{procedimento.tipo}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prêmio: {{procedimento.premio}}</div>
+              </ion-label>
             </ion-item>
             <div slot="content">
               <ion-list>
@@ -44,9 +46,9 @@
     </ion-item-group>
   </ion-list>
   <br>
-  <h6>Pontos Necessários: {{pontosNecessarios}}</h6>
-  <h6>Total de Pontos: {{totalPontos}}</h6>
-  <h6>Valor Total: {{totalValor | currency: 'R$ '}}</h6>
+  <h6 class="title-color">Pontos Necessários: {{pontosNecessarios}}</h6>
+  <h6 class="title-color">Total de Pontos: {{totalPontos}}</h6>
+  <h6 class="title-color">Valor Total: {{totalValor | currency: 'R$ '}}</h6>
   <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button routerLink="/collector">
       <ion-icon name="file-tray-full-outline"></ion-icon>

@@ -18,6 +18,10 @@
       <ion-item>
         Código: {{item.procedimento.referencia.codigo}} -
         Descrição: {{item.procedimento.referencia.descricao}}
+        <br>
+        Tipo: {{item.procedimento.tipo}} -
+        Prêmio: {{item.procedimento.premio}}
+        <br>
       </ion-item>
       <ion-item-options side="end">
         <ion-item-option button (click)="excluirProcedimento(item.procedimento, item.cirurgia)" color="danger">
