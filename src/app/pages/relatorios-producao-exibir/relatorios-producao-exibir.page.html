@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item-group *ngFor="let cirurgia of cirurgias; let i = index">
       <ion-item-divider class="item-divider">
-        <ion-label >DATA: {{cirurgia.data}} MATRÍCULA: {{cirurgia.matricula}}</ion-label>
+        <ion-label >DATA: {{cirurgia.data}} ATENDIMENTO: {{cirurgia.matricula}}</ion-label>
       </ion-item-divider>
       <ion-accordion-group *ngFor="let procedimento of cirurgia.procedimentos; let j = index">
         <ion-item-sliding>

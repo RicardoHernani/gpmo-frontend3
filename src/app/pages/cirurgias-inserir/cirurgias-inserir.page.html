@@ -12,10 +12,10 @@
  <ion-content class="ion-padding">
   <form [formGroup]="inserirCirurgiaFormGroup" (ngSubmit)="loadUsuario(); $event.preventDefault()">
     <ion-item>
-      <ion-label position="floating">Matrícula*</ion-label>
+      <ion-label position="floating">Atendimento*</ion-label>
       <ion-input clear-input="true" formControlName="matricula" type="digit"></ion-input>
     </ion-item>
-    <p class="danger" *ngIf="inserirCirurgiaFormGroup.controls['matricula'].dirty && inserirCirurgiaFormGroup.controls['matricula'].errors" margin="left">Matrícula deve conter entre 6 e 9 dígitos</p>
+    <p class="danger" *ngIf="inserirCirurgiaFormGroup.controls['matricula'].dirty && inserirCirurgiaFormGroup.controls['matricula'].errors" margin="left">Atendimento deve conter entre 6 e 9 dígitos</p>
     <br/>
     <ion-item>
       <ion-label position="floating">Data*</ion-label>
