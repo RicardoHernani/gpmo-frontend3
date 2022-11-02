@@ -23,6 +23,7 @@ export class RelatoriosProducaoExibirPage implements OnInit {
   totalPontos: number;
   totalValor: number;
   pontosNecessarios: number;
+  aindaFaltam: any;
 
   constructor(
     public route: ActivatedRoute,
@@ -56,10 +57,11 @@ export class RelatoriosProducaoExibirPage implements OnInit {
     this.totalValor = 0;
     this.totalPontos = this.pontosExtras;
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
-     for (let i = 0; i<this.cirurgias.length; i++) {
+    for (let i = 0; i<this.cirurgias.length; i++) {
       this.totalPontos = this.cirurgias[i].subTotalPontos + this.totalPontos;
       this.totalValor = this.cirurgias[i].subTotalValor + this.totalValor;
     }
+    this.aindaFaltam = (this.pontosNecessarios - this.totalPontos).toFixed(2);
   }
 
   addToCollector(procedimento: ProcedimentoDTO, cirurgia: CirurgiaDTO) {

@@ -92,7 +92,7 @@ procedimentos: ProcedimentoDTO[];
   async noProcedimentosAlert(i: number) {
     const alert = await this.alertCtrl.create({
       header: 'Atenção!!!',
-      message: 'Todos os procedimentos para esta cirurgia foram apagados, portanto a cirurgia também será',
+      message: 'Todos os procedimentos para esta cirurgia serão apagados, portanto a cirurgia também será',
       backdropDismiss: false,
       buttons: [
         {

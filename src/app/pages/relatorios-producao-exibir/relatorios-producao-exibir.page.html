@@ -46,8 +46,9 @@
     </ion-item-group>
   </ion-list>
   <br>
-  <h6 class="title-color">Pontos Necessários: {{pontosNecessarios}}</h6>
-  <h6 class="title-color">Total de Pontos: {{totalPontos}}</h6>
+  <h6 class="title-color">Necessários: {{pontosNecessarios}} pontos</h6>
+  <h6 class="title-color">Realizados: {{totalPontos}} pontos</h6>
+  <h6 class="title-color">Faltam: {{aindaFaltam}} pontos</h6>
   <h6 class="title-color">Valor Total: {{totalValor | currency: 'R$ '}}</h6>
   <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button routerLink="/collector">
