@@ -99,4 +99,19 @@ export class ReferenciasPage implements OnInit {
     loading.present();
     return loading;
   }
+
+  async expand(item) {
+    const alert = await this.alertCtrl.create({
+      header: 'Descrição',
+      message: item.descricao,
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'OK'
+        }
+      ]
+    });
+      alert.present();
+  }
+
 }
