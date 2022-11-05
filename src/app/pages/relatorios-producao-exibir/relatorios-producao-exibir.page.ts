@@ -62,6 +62,7 @@ export class RelatoriosProducaoExibirPage implements OnInit {
       this.totalValor = this.cirurgias[i].subTotalValor + this.totalValor;
     }
     this.aindaFaltam = (this.pontosNecessarios - this.totalPontos).toFixed(2);
+    this.aindaFaltam = (this.aindaFaltam <= 0) ? this.aindaFaltam = 0 : this.aindaFaltam;
   }
 
   addToCollector(procedimento: ProcedimentoDTO, cirurgia: CirurgiaDTO) {

@@ -20,13 +20,16 @@ export class CollectorPage implements OnInit {
     }
 
   ngOnInit() {
-    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
     const collector = this.collectorService.getCollector();
     this.items = collector.items;
   }
 
   excluirProcedimento(procedimento: ProcedimentoDTO, cirurgia: CirurgiaDTO) {
     this.items = this.collectorService.removeProcedimento(procedimento, cirurgia).items;
+  }
+
+  ionViewWillEnter() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
   }
 
   ionViewDidLeave() {
